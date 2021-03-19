@@ -1,0 +1,21 @@
+{
+  "name": "cooking-whatever",
+  "version": "1.0.0",
+  "description": "whatever todds cooking",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "run": "cp client/* dist/."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toddself/cooking-whatever.git"
+  },
+  "keywords": [],
+  "author": "Todd Kennedy <cooking@todd.selfassembled.org>",
+  "license": "Unlicensed",
+  "bugs": {
+    "url": "https://github.com/toddself/cooking-whatever/issues"
+  },
+  "homepage": "https://github.com/toddself/cooking-whatever#readme"
+}
