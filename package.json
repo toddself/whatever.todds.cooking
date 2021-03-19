@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "run": "cp client/* dist/."
+    "start": "cp client/* dist/."
   },
   "repository": {
     "type": "git",
