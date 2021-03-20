@@ -13,7 +13,7 @@ export function entryTemplate({contents,  modified, tags}: FileEntry, index = fa
   return `<div class="post">
   <div>${contents}</div>
   <time>${modified.toLocaleString('en-US', dateFormat)}</time>
-  ${tags.length > 0 ? `Tags: <ul>${tags.map(t => `<li><a href="tags.html#${t}">${t}</a>`)}</ul>` : ''}
+  ${tags.length > 0 ? `Tags: <ul class="tags">${tags.map(t => `<li><a href="tags.html#${t}">${t}</a>`)}</ul>` : ''}
   ${index ? '' : '<nav><a href="index.html">back home</a></nav>'}
 </div>`
 }

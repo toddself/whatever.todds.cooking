@@ -43,12 +43,12 @@ a.title:visited {
   color: #000000;
 }
 
-.post ul {
+.post ul.tags {
   display: inline-block;
   padding: 1rem 0 0 0;
 }
 
-.post li {
+.post li.tags {
   display: inline;
   padding-right: .5rem;
 }
