@@ -1,0 +1,27 @@
+html {
+  font-family: sans-serif;
+}
+
+h1 {
+  margin: 2rem;
+}
+
+.content {
+  width: 60%;
+  margin: 0 auto;
+}
+
+time {
+  display: block;
+  padding-top: .5rem;
+}
+
+@media (max-width: 1000px) {
+  .content {
+    width: 90%;
+  }
+
+  h1 {
+    margin: .5rem;
+  }
+}
