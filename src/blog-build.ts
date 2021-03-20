@@ -35,7 +35,7 @@ export class BlogBuilder {
 
   async buildEntry (fn: string): Promise<FileEntry> {
     const rawContents = this._td.decode(await Deno.readFile(fn))
-    const [modified, ...content] = rawContents.split('\n')
+    const [modified, ...blogText] = rawContents.split('\n')
     let mtime = new Date()
     if (modified.startsWith('$')) {
       mtime = new Date(modified.slice(1))
@@ -43,9 +43,13 @@ export class BlogBuilder {
         mtime = new Date()
       }
     } else {
-      content.unshift(modified)
+      blogText.unshift(modified)
     }
-    const contents = Marked.parse(content.join('\n').trim()).content
+
+    const u = `/${basename(fn).replace(/md$/, 'html')}`
+    const titleLine = blogText.findIndex(a => a.trim().length > 0)
+    blogText[titleLine] = `## [${blogText[titleLine].slice(2)}](${u})\n`
+    const contents = Marked.parse(blogText.join('\n').trim()).content
 
     const entry: FileEntry = {
       modified: mtime || new Date(),

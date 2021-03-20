@@ -1,4 +1,3 @@
-import { basename } from 'https://deno.land/std@0.90.0/path/mod.ts'
 import { FileEntry } from './file-entry.ts'
 
 const dateFormat: Intl.DateTimeFormatOptions = {
@@ -9,9 +8,8 @@ const dateFormat: Intl.DateTimeFormatOptions = {
   timeZone: "America/Los_Angeles"
 }
 
-export function entryTemplate({contents,  modified, fn}: FileEntry, index = false) {
-  const u = basename(fn).replace(/md$/, 'html')
-  return `<div data-canonical="/${u}" class="post">
+export function entryTemplate({contents,  modified}: FileEntry, index = false) {
+  return `<div class="post">
   <div>${contents}</div>
   <time>${modified.toLocaleString('en-US', dateFormat)}</time>
   ${index ? '' : '<nav><a href="/index.html">back home</a></nav>'}
@@ -34,7 +32,6 @@ export function pageTemplate(title: string, contents: string|string[]) {
   ${Array.isArray(contents) ? contents.join('') : contents}
   <footer>All content copyright © 2021, license: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a></footer>
   </div>
-  <script src="links.js"></script>
   </body>
 </html>`
 }
