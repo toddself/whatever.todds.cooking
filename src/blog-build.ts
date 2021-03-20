@@ -54,7 +54,7 @@ export class BlogBuilder {
   destDir: string
   _td: TextDecoder
   _te: TextEncoder
-  recent: {[key: number]: string} = {}
+  recent: {[key: string]: string} = {}
   manifestFile: string
 
   constructor (srcDir: string, destDir: string) {
@@ -95,7 +95,9 @@ export class BlogBuilder {
 
   async buildIndex () {
     console.log(`All posts: ${Object.keys(this.recent).join(', ')}`)
-    const top10 = Object.keys(this.recent).sort().map(a => parseInt(a, 10)).slice(0, 10)
+    const top10 = Object.keys(this.recent)
+      .sort((a, b) => parseInt(a.split(':')[0], 10) - parseInt(b.split(':')[0], 10))
+      .slice(0, 10)
     const entries = []
     for (const key of top10) {
       const contents = entryTemplate(await this.buildEntry(this.recent[key]), true)
@@ -131,7 +133,8 @@ export class BlogBuilder {
         const fn = join(this.srcDir, e.name)
         const entry = await this.buildEntry(fn)
         await this.createEntry(entry)
-        this.recent[entry.modified.getTime()] = entry.fn
+        const rk = `${entry.modified.getTime()}:${entry.fn}`
+        this.recent[rk] = entry.fn
       }
     }
 
