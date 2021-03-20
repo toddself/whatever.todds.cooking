@@ -14,7 +14,9 @@ interface FileEntry {
 const dateFormat: Intl.DateTimeFormatOptions = {
   weekday: "long",
   year: "numeric",
-  month: "long", day: "numeric"
+  month: "long",
+  day: "numeric",
+  timeZone: "America/Los_Angeles"
 }
 
 function entryTemplate({contents, created, modified, fn}: FileEntry, index = false) {
