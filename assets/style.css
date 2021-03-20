@@ -35,6 +35,14 @@ a:visited {
   color: #401f6f;
 }
 
+a.title {
+  color: #000000;
+}
+
+a.title:visited {
+  color: #000000;
+}
+
 @media (max-width: 1000px) {
   .content {
     width: 90%;
@@ -57,6 +65,16 @@ a:visited {
 
   a:visited {
     color: #D4B5EB;
+  }
+
+  a.title {
+    color: #DDDDDD;
+    text-decoration: none;
+  }
+
+  a.title:visited {
+    color: #DDDDDD;
+    text-decoration: none;
   }
 }
 
