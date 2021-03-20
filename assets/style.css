@@ -1,19 +1,22 @@
-html {
-  font-family: sans-serif;
-}
-
 h1 {
   margin: 2rem;
+}
+
+h1, h2 {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .content {
   width: 60%;
   margin: 0 auto;
+  font-family: Georgia, Times New Roman, serif;
 }
 
 time {
   display: block;
   padding-top: .5rem;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: bold;
 }
 
 nav, footer {
@@ -56,3 +59,4 @@ a:visited {
     color: #D4B5EB;
   }
 }
+
