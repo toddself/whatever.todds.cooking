@@ -24,6 +24,14 @@ nav, footer {
   max-width: 100%;
 }
 
+a {
+  color: #1F2F6F;
+}
+
+a:visited {
+  color: #401f6f;
+}
+
 @media (max-width: 1000px) {
   .content {
     width: 90%;
@@ -31,5 +39,20 @@ nav, footer {
 
   h1 {
     margin: .5rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+      background-color: #262626;
+      color: #DDDDDD;
+  }
+
+  a {
+    color: #AFF3FE;
+  }
+
+  a:visited {
+    color: #D4B5EB;
   }
 }
