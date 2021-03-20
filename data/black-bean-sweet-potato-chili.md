@@ -1,3 +1,4 @@
+$2021-03-19T21:00:00-0700
 ## Black Bean & Sweet Potato Chili
 
 Some simple "chili".  Whatever. It's got:

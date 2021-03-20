@@ -1,58 +1,9 @@
 import { join, isAbsolute, basename } from 'https://deno.land/std@0.90.0/path/mod.ts'
-import { createHash } from 'https://deno.land/std@0.90.0/hash/mod.ts'
 
 import { Marked } from 'https://deno.land/x/markdown@v2.0.0/mod.ts'
 
-interface FileEntry {
-  modified: Date
-  created: Date
-  fn: string
-  contents: string
-  hash: string
-}
-
-const dateFormat: Intl.DateTimeFormatOptions = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  timeZone: "America/Los_Angeles"
-}
-
-function entryTemplate({contents, created, modified, fn}: FileEntry, index = false) {
-  let mod =  ""
-  if (created.getTime() !== modified.getTime()) {
-    mod = `, Updated ${modified.toLocaleString('en-US', dateFormat)}`
-  }
-
-  const u = basename(fn).replace(/md$/, 'html')
-  return `<div data-canonical="/${u}" class="post">
-  <div>${contents}</div>
-  <time>${created.toLocaleString('en-US', dateFormat)}${mod}</time>
-  ${index ? '' : '<nav><a href="/index.html">back home</a></nav>'}
-</div>`
-}
-
-function pageTemplate(title: string, contents: string|string[]) {
-  return `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Whatever Todd's Cooking. In a blog">
-    <title>${title ? title : 'whatever todds cooking'}</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-  ${title ? '' : "<h1>whatever todd's cooking</h1>"}
-  <div class="content">
-  ${Array.isArray(contents) ? contents.join('') : contents}
-  <footer>All content copyright © 2021, license: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a></footer>
-  </div>
-  <script src="links.js"></script>
-  </body>
-</html>`
-}
+import { FileEntry } from './file-entry.ts'
+import { entryTemplate, pageTemplate } from './templates.ts'
 
 export class BlogBuilder {
   srcDir: string
@@ -83,17 +34,23 @@ export class BlogBuilder {
   }
 
   async buildEntry (fn: string): Promise<FileEntry> {
-    const { mtime, birthtime } = await Deno.stat(fn)
     const rawContents = this._td.decode(await Deno.readFile(fn))
-    const contents = Marked.parse(rawContents).content
-    const hash = createHash('sha1')
+    const [modified, ...content] = rawContents.split('\n')
+    let mtime = new Date()
+    if (modified.startsWith('$')) {
+      mtime = new Date(modified.slice(1))
+      if (isNaN(mtime.getTime())) {
+        mtime = new Date()
+      }
+    } else {
+      content.unshift(modified)
+    }
+    const contents = Marked.parse(content.join('\n').trim()).content
 
     const entry: FileEntry = {
       modified: mtime || new Date(),
-      created: birthtime || new Date(),
       fn,
       contents,
-      hash: hash.update(contents).toString()
     }
     return entry
   }
@@ -101,7 +58,7 @@ export class BlogBuilder {
   async buildIndex () {
     console.log(`All posts: ${Object.keys(this.recent).join(', ')}`)
     const top10 = Object.keys(this.recent)
-      .sort((a, b) => parseInt(a.split(':')[0], 10) - parseInt(b.split(':')[0], 10))
+      .sort((a, b) => parseInt(b.split(':')[0], 10) - parseInt(a.split(':')[0], 10))
       .slice(0, 10)
     const entries = []
     for (const key of top10) {
