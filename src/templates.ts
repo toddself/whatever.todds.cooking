@@ -1,4 +1,5 @@
 import { FileEntry } from './file-entry.ts'
+import { Tag } from './tag-builder.ts'
 
 const dateFormat: Intl.DateTimeFormatOptions = {
   weekday: "long",
@@ -8,11 +9,12 @@ const dateFormat: Intl.DateTimeFormatOptions = {
   timeZone: "America/Los_Angeles"
 }
 
-export function entryTemplate({contents,  modified}: FileEntry, index = false) {
+export function entryTemplate({contents,  modified, tags}: FileEntry, index = false) {
   return `<div class="post">
   <div>${contents}</div>
   <time>${modified.toLocaleString('en-US', dateFormat)}</time>
-  ${index ? '' : '<nav><a href="/index.html">back home</a></nav>'}
+  ${tags.length > 0 ? `Tags: <ul>${tags.map(t => `<li><a href="tags.html#${t}">${t}</a>`)}</ul>` : ''}
+  ${index ? '' : '<nav><a href="index.html">back home</a></nav>'}
 </div>`
 }
 
@@ -27,11 +29,20 @@ export function pageTemplate(title: string, contents: string|string[]) {
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  <a href="/" class="title">${title ? '' : "<h1>whatever todd's cooking</h1>"}</a>
+  <a href="/" class="title"><h1>${title ? title : "whatever todd's cooking"}</h1></a>
   <div class="content">
   ${Array.isArray(contents) ? contents.join('') : contents}
   <footer>All content copyright © 2021, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a> Source: <a href="https://github.com/toddself/whatever.todds.cooking">github</a></footer>
   </div>
   </body>
 </html>`
+}
+
+export function tagTemplate(tagList: Map<string, Tag[]>) {
+  const data = ['<dl>']
+  for (const [tag, entries] of Array.from(tagList)) {
+    data.push(`<dt id="${tag}">${tag}</dt><dd><ul>${entries.map(e => `<li><a href="${e.href}">${e.title}</a>`)}</ul></dd>`)
+  }
+  data.push('</dl>')
+  return data.join('')
 }
