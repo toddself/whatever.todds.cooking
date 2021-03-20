@@ -16,8 +16,8 @@ time {
   padding-top: .5rem;
 }
 
-nav footer {
-  padding-top: .5rem;
+nav, footer {
+  padding-top: 1.5rem;
 }
 
 .post img {
