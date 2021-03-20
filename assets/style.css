@@ -20,6 +20,10 @@ nav {
   padding-top: .5rem;
 }
 
+.post img {
+  max-width: 100%;
+}
+
 @media (max-width: 1000px) {
   .content {
     width: 90%;

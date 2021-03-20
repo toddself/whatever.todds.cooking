@@ -94,10 +94,11 @@ export class BlogBuilder {
   }
 
   async buildIndex () {
+    console.log(`All posts: ${Object.keys(this.recent).join(', ')}`)
     const top10 = Object.keys(this.recent).sort().map(a => parseInt(a, 10)).slice(0, 10)
     const entries = []
     for (const key of top10) {
-      const contents = entryTemplate(await this.buildEntry(this.recent[key]))
+      const contents = entryTemplate(await this.buildEntry(this.recent[key]), true)
       entries.push(contents)
     }
 
@@ -130,7 +131,7 @@ export class BlogBuilder {
         const fn = join(this.srcDir, e.name)
         const entry = await this.buildEntry(fn)
         await this.createEntry(entry)
-        this.recent[entry.modified.getDate()] = entry.fn
+        this.recent[entry.modified.getTime()] = entry.fn
       }
     }
 
