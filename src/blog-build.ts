@@ -17,13 +17,14 @@ const dateFormat: Intl.DateTimeFormatOptions = {
   month: "long", day: "numeric"
 }
 
-function entryTemplate({contents, created, modified}: FileEntry) {
+function entryTemplate({contents, created, modified, fn}: FileEntry) {
   let mod =  ""
   if (created.getTime() !== modified.getTime()) {
     mod = `, Updated ${modified.toLocaleString('en-US', dateFormat)}`
   }
 
-  return `<div class="post">
+  const u = basename(fn).replace(/md$/, 'html')
+  return `<div data-canonical="/${u}" class="post">
   <div>${contents}</div>
   <time>${created.toLocaleString('en-US', dateFormat)}${mod}</time>
 </div>`
@@ -42,6 +43,7 @@ function pageTemplate(title: string, contents: string|string[]) {
   <div class="content">
   ${Array.isArray(contents) ? contents.join('') : contents}
   </div>
+  <script src="links.js"></script>
   </body>
 </html>`
 }
@@ -94,7 +96,7 @@ export class BlogBuilder {
     const top10 = Object.keys(this.recent).sort().map(a => parseInt(a, 10)).slice(0, 10)
     const entries = []
     for (const key of top10) {
-      const {contents} = await this.buildEntry(this.recent[key])
+      const contents = entryTemplate(await this.buildEntry(this.recent[key]))
       entries.push(contents)
     }
 
