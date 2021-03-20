@@ -1,4 +1,5 @@
 $2021-03-20T10:08:00-07:00
+%weekly-menu
 ## Dinners for the Week of March 22
 
 It's time for weekly meal planning so I can make a shopping list so I can go to the store so we don't just order in pizza every night.  This week's menu includes:
