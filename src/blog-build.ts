@@ -17,7 +17,7 @@ const dateFormat: Intl.DateTimeFormatOptions = {
   month: "long", day: "numeric"
 }
 
-function entryTemplate({contents, created, modified, fn}: FileEntry) {
+function entryTemplate({contents, created, modified, fn}: FileEntry, index = false) {
   let mod =  ""
   if (created.getTime() !== modified.getTime()) {
     mod = `, Updated ${modified.toLocaleString('en-US', dateFormat)}`
@@ -27,6 +27,7 @@ function entryTemplate({contents, created, modified, fn}: FileEntry) {
   return `<div data-canonical="/${u}" class="post">
   <div>${contents}</div>
   <time>${created.toLocaleString('en-US', dateFormat)}${mod}</time>
+  ${index ? '' : '<nav><a href="/index.html">back home</a></nav>'}
 </div>`
 }
 

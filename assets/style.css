@@ -16,6 +16,10 @@ time {
   padding-top: .5rem;
 }
 
+nav {
+  padding-top: .5rem;
+}
+
 @media (max-width: 1000px) {
   .content {
     width: 90%;
