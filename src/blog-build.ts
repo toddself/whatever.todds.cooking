@@ -44,6 +44,7 @@ function pageTemplate(title: string, contents: string|string[]) {
   <div class="content">
   ${Array.isArray(contents) ? contents.join('') : contents}
   </div>
+  <footer>All content copyright © 2021, license: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a></footer>
   <script src="links.js"></script>
   </body>
 </html>`
