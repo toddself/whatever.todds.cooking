@@ -34,10 +34,12 @@ function entryTemplate({contents, created, modified, fn}: FileEntry, index = fal
 }
 
 function pageTemplate(title: string, contents: string|string[]) {
-  return `<html>
+  return `<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Whatever Todd's Cooking. In a blog">
     <title>${title ? title : 'whatever todds cooking'}</title>
     <link rel="stylesheet" href="style.css">
   </head>
