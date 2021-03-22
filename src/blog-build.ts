@@ -107,7 +107,7 @@ export class BlogBuilder {
         pagination.push(`index${i > 0 ? i : ''}.html`)
       }
 
-      const index = pageTemplate('', entries, pagination)
+      const index = pageTemplate('', entries, pagination.length > 0 ? pagination : undefined)
       const fn = join(this.destDir, `index${i > 0 ? i : ''}.html`)
       try {
         await Deno.writeFile(fn, this._te.encode(index))
