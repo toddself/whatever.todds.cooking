@@ -10,6 +10,8 @@ h1, h2 {
   width: 60%;
   margin: 0 auto;
   font-family: Georgia, Times New Roman, serif;
+  line-height: 1.5rem;
+  letter-spacing: 0.008rem;
 }
 
 time {
