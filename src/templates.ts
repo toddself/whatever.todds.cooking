@@ -40,7 +40,10 @@ export function pageTemplate(title: string, contents: string|string[]) {
 
 export function tagTemplate(tagList: Map<string, Tag[]>) {
   const data = ['<dl>']
-  for (const [tag, entries] of Array.from(tagList)) {
+  const tags = Array.from(tagList).map(a => a[0]).sort()
+  for (const tag of tags) {
+    const entries = tagList.get(tag)
+    if (!Array.isArray(entries)) continue
     data.push(`<dt id="${tag}">${tag}</dt><dd><ul>${entries.map(e => `<li><a href="${e.href}">${e.title}</a>`)}</ul></dd>`)
   }
   data.push('</dl>')
