@@ -6,24 +6,34 @@ import { FileEntry } from './file-entry.ts'
 import { entryTemplate, pageTemplate } from './templates.ts'
 import { TagBuilder } from './tag-builder.ts'
 
+const ENTRIES_PER_PAGE = 20
+
+function* range(start: number, end: number): IterableIterator<number> {
+  yield start;
+  if (start === end) return;
+  yield* range(++start, end)
+}
+
 export class BlogBuilder {
   srcDir: string
   destDir: string
+  entriesPerPage: number
   _td: TextDecoder
   _te: TextEncoder
   recent: {[key: string]: string} = {}
   tb: TagBuilder = new TagBuilder()
 
-  constructor (srcDir: string, destDir: string) {
+  constructor (srcDir: string, destDir: string, entriesPerPage: number = ENTRIES_PER_PAGE) {
     this.srcDir = isAbsolute(srcDir) ? srcDir : join(Deno.cwd(), srcDir)
     this.destDir = isAbsolute(destDir) ? destDir : join(Deno.cwd(), destDir)
     this._td = new TextDecoder('utf-8')
     this._te = new TextEncoder()
+    this.entriesPerPage = entriesPerPage
   }
 
   async createEntry (entry: FileEntry) {
     const contents = entryTemplate(entry)
-    const page = pageTemplate('', contents)
+    const page = pageTemplate('', contents, undefined)
     const outFn = join(this.destDir, basename(entry.fn.replace(/\md$/, 'html')))
     try {
       await Deno.writeFile(outFn, this._te.encode(page))
@@ -72,23 +82,40 @@ export class BlogBuilder {
   }
 
   async buildIndex () {
-    const top10 = Object.keys(this.recent)
+    // sort by entry date, and create page chunks for paginating
+    const sorted = Object.keys(this.recent)
       .sort((a, b) => parseInt(b.split(':')[0], 10) - parseInt(a.split(':')[0], 10))
-      .slice(0, 10)
-    const entries = []
-    for (const key of top10) {
-      const contents = entryTemplate(await this.buildEntry(this.recent[key], true), true)
-      entries.push(contents)
+    const indexPages = []
+    let currIndex = 0
+    for (let i = this.entriesPerPage, sl = sorted.length; currIndex < sl; i += this.entriesPerPage) {
+      if (i > sl) i = sl
+      indexPages.push(sorted.slice(currIndex, i))
+      currIndex = i
     }
 
-    const index = pageTemplate('', entries)
-    const fn = join(this.destDir, 'index.html')
-    try {
-      await Deno.writeFile(fn, this._te.encode(index))
-      console.log('Wrote index')
-    } catch (e) {
-      console.log('Unable to write index', e)
-      Deno.exit(1)
+    // make individual index pages for each chunk
+    for (let i = 0, il = indexPages.length; i < il; i++) {
+      const batch = indexPages[i]
+      const entries = []
+      for (const key of batch) {
+        const contents = entryTemplate(await this.buildEntry(this.recent[key], true), true)
+        entries.push(contents)
+      }
+
+      const pagination = []
+      for (const i of range(0, il - 1)) {
+        pagination.push(`index${i > 0 ? i : ''}.html`)
+      }
+
+      const index = pageTemplate('', entries, pagination.length > 1 ? pagination : undefined)
+      const fn = join(this.destDir, `index${i > 0 ? i : ''}.html`)
+      try {
+        await Deno.writeFile(fn, this._te.encode(index))
+        console.log('Wrote index')
+      } catch (e) {
+        console.log('Unable to write index', e)
+        Deno.exit(1)
+      }
     }
   }
 

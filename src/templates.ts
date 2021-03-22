@@ -18,7 +18,7 @@ export function entryTemplate({contents,  modified, tags}: FileEntry, index = fa
 </article>`
 }
 
-export function pageTemplate(title: string, contents: string|string[]) {
+export function pageTemplate(title: string, contents: string|string[], pagination?: string[]) {
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,6 +33,7 @@ export function pageTemplate(title: string, contents: string|string[]) {
   <main class="content">
   ${Array.isArray(contents) ? contents.join('') : contents}
   </main>
+  ${Array.isArray(pagination) ? `<nav class="content">Other posts: <ol class="tags">${pagination.map((p, i) => `<li class="tags"><a href="${p}">${i > 0 ? `page ${i}` : 'home'}</a>`)}</ol></nav>` : ''}
   <footer class="content">All content copyright © 2021, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a> Source: <a href="https://github.com/toddself/whatever.todds.cooking">github</a></footer>
   </body>
 </html>`
