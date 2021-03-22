@@ -10,12 +10,12 @@ const dateFormat: Intl.DateTimeFormatOptions = {
 }
 
 export function entryTemplate({contents,  modified, tags}: FileEntry, index = false) {
-  return `<div class="post">
+  return `<article class="post">
   <div>${contents}</div>
   <time>${modified.toLocaleString('en-US', dateFormat)}</time>
   ${tags.length > 0 ? `Tags: <ul class="tags">${tags.map(t => `<li class="tags"><a href="tags.html#${t}">${t}</a>`)}</ul>` : ''}
   ${index ? '' : '<nav><a href="index.html">back home</a></nav>'}
-</div>`
+</article>`
 }
 
 export function pageTemplate(title: string, contents: string|string[]) {
@@ -29,11 +29,11 @@ export function pageTemplate(title: string, contents: string|string[]) {
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  <a href="/" class="title"><h1>${title ? title : "whatever todd's cooking"}</h1></a>
-  <div class="content">
+  <header><a href="/" class="title"><h1>${title ? title : "whatever todd's cooking"}</h1></a></header>
+  <main class="content">
   ${Array.isArray(contents) ? contents.join('') : contents}
-  <footer>All content copyright © 2021, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a> Source: <a href="https://github.com/toddself/whatever.todds.cooking">github</a></footer>
-  </div>
+  </main>
+  <footer class="content">All content copyright © 2021, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a> Source: <a href="https://github.com/toddself/whatever.todds.cooking">github</a></footer>
   </body>
 </html>`
 }
