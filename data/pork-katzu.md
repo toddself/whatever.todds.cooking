@@ -17,3 +17,20 @@ I usually refridgerate the cutlets for an hour or so before frying them in 360º
 The salad is pretty simple &#151; a head of fennel and a half a red onion, shaved thin. See that brutality of a kitchen implement? Ask me about the 17 stitches I have in my right pinky.  Now ask me about that glove.  It's cool, I see you're busy, I'll wait. The dressing is a a standard 1:2 ratio of rice vinegar and half toasted sesame oil and half canola oil, with some dijon mustard, soy sauce and white miso in there for salt and funk.
 
 ![A cut-proof glove on a mandolin](pork_katzu_mandolin.jpg)
+
+Ingredients list:
+* Pork loin
+* Eggs
+* Milk
+* All-Purpose Flour
+* Panko Breadcrumbs
+* Canola Oil
+* Fennel
+* Flat-Leaf (Italian) Parsley
+* Small Red Onion
+* Miso
+* Soy Sauce
+* Toasted Sesame Oil
+* White Miso Paste
+* Rice
+* Bulldog Tonkatzu Sauce

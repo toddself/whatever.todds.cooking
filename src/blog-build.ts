@@ -50,7 +50,6 @@ export class BlogBuilder {
     const tagList: string[] = []
     if (tags.startsWith('%')) {
       tagList.push.apply(tagList, tags.slice(1).split(','))
-      console.log(tagList)
     } else{
       blogText.unshift(tags)
     }
