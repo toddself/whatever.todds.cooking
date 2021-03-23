@@ -43,6 +43,27 @@ export class BlogBuilder {
     }
   }
 
+  fixQuotes (lines: string[]): string[] {
+    const l = [...lines.join('\n')]
+    let inQuote = false
+    for (let i = 0, ll = l.length; i < ll; i++) {
+      const char = l[i]
+      if (char === "'") {
+        l[i] = "’"
+      }
+      if (char === '"') {
+        if (inQuote) {
+          l[i] = '”'
+          inQuote = false
+        } else {
+          l[i] = '“'
+          inQuote = true
+        }
+      }
+    }
+    return l.join('').split('\n')
+  }
+
   async buildEntry (fn: string, skipTagging = false): Promise<FileEntry> {
     const rawContents = this._td.decode(await Deno.readFile(fn))
     const [modified, tags, ...blogText] = rawContents.split('\n')
@@ -70,7 +91,7 @@ export class BlogBuilder {
       tagList.forEach(t => this.tb.add(t, blogText[titleLine].slice(2), u))
     }
     blogText[titleLine] = `## [${blogText[titleLine].slice(2)}](${u})\n`
-    const contents = Marked.parse(blogText.join('\n').trim()).content
+    const contents = Marked.parse(this.fixQuotes(blogText).join('\n').trim()).content
 
     const entry: FileEntry = {
       modified: mtime || new Date(),
