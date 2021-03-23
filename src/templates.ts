@@ -24,12 +24,12 @@ export function pageTemplate(title: string, contents: string|string[], paginatio
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Whatever Todd's Cooking. In a blog">
-    <title>${title ? title : 'whatever todds cooking'}</title>
+    <meta name="description" content="Whatever Todd‘s Cooking. In a blog">
+    <title>${title ? title : 'whatever todd‘s cooking'}</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  <header><a href="/" class="title"><h1>${title ? title : "whatever todd's cooking"}</h1></a></header>
+  <header><a href="/" class="title"><h1>${title ? title : "whatever todd’s cooking"}</h1></a></header>
   <main class="content">
   ${Array.isArray(contents) ? contents.join('') : contents}
   </main>
