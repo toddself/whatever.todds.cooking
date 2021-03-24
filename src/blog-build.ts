@@ -46,12 +46,19 @@ export class BlogBuilder {
   fixQuotes (lines: string[]): string[] {
     const l = [...lines.join('\n')]
     let inQuote = false
+    let inTag = false
     for (let i = 0, ll = l.length; i < ll; i++) {
       const char = l[i]
+      if (char === '<') {
+        inTag = true
+      }
+      if (char === '>') {
+        inTag = false
+      }
       if (char === "'") {
         l[i] = "’"
       }
-      if (char === '"') {
+      if (char === '"' && !inTag) {
         if (inQuote) {
           l[i] = '”'
           inQuote = false
