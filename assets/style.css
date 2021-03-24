@@ -25,8 +25,12 @@ nav, footer {
   padding-top: 1.5rem;
 }
 
-.post img {
+.post img, .post video {
   max-width: 100%;
+}
+
+figcaption {
+  font-style: italic;
 }
 
 a {
