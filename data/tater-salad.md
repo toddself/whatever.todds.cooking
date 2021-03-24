@@ -10,4 +10,4 @@ The dressing tonight was celery seed, mayo, sour cream, apple cider vinegar, dij
 
 I also heated up some veggie burgers from Costco. They taste like tumeric in a weird way, but, whatever, one of my kids will eat it. The other one pretends like they're being gagged with a spoon or being waterboarded so they got to eat a slice of cheese in a bun.
 
-![Clip from the Simpsons: Lunch Lady Doris is handing Lisa a hot-dog bun and says "It's rich in bunnly goodness"](https://frinkiac.com/video/S07E05/s1ww2ue4l66ZDVaIJHhpS-xD5Kc=.gif)
+<video autoplay="false" loop="" playsinline="" style="opacity: 1;" poster="https://frinkiac.com/img/S07E05/436101.jpg" controls="true" width="480"><source src="440756.mp4" type="video/mp4"></video>
