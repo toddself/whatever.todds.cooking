@@ -2,7 +2,7 @@ $2021-03-24T08:16:00-07:00
 %pancakes
 ## Pancakes! Pancakes! Pancakes!
 
-Despite one of my lovely children likening to eating my pancakes to choking down roadkill this morning, I got cajoled by the other child into making pancakes this morning. (Note: the child that said they have to shove them down and hope they don't vomit ate two of them without complaint faster than I could cook the rest of the batch.) The ironic part is that I chose the cooktop I have heavily based on the fact that I wanted to be able to use a griddle on it so I wanted burners with symetrical output so that I wouldn't have to fuck with the heat too much to get it be even.  Jokes on me I guess.
+Despite one of my lovely children likening eating my pancakes to choking down roadkill this morning, I got cajoled by the other child into making pancakes this morning. (Note: the child that said they have to shove them down and hope they don't vomit ate two of them without complaint faster than I could cook the rest of the batch.) The ironic part is that I chose the cooktop I have heavily based on the fact that I wanted to be able to use a griddle on it so I wanted burners with symmetrical output so that I wouldn't have to fuck with the heat too much to get it be even.  Jokes on me I guess.
 
 ![two chocolate chip pancakes on a griddle](pancakes_before_the_fall.jpg)
 
