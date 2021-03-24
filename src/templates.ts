@@ -27,6 +27,7 @@ export function pageTemplate(title: string, contents: string|string[], paginatio
     <meta name="description" content="Whatever Todd‘s Cooking. In a blog">
     <title>${title ? title : 'whatever todd‘s cooking'}</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82fdb0078f0f4fefbdc9c3788047400d"}'></script>
   </head>
   <body>
   <header><a href="/" class="title"><h1>${title ? title : "whatever todd’s cooking"}</h1></a></header>
