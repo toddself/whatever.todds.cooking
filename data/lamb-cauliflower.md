@@ -1,4 +1,4 @@
-$2021-03-26T19:28:00-7:00
+$2021-03-26T19:28:00-07:00
 %lamb,labneh,cauliflower
 ## Lamb Kabobs, Cauliflower & Hazelnut Salad, Labneh
 
