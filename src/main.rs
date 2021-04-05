@@ -1,4 +1,6 @@
-use std::fs::{DirBuilder, ReadDir, read_to_string, write};
+mod builder;
+pub use crate::builder::Builder;
+
 use clap::{Arg, App};
 
 fn main() {
@@ -30,19 +32,7 @@ fn main() {
     let src_dir = matches.value_of("src").unwrap();
     let dest_dir = matches.value_of("dest").unwrap();
     let entries: i32 = matches.value_of("entries").unwrap().parse().unwrap();
-
-    let b = Builder{
-        src_dir,
-        dest_dir,
-        entries
-    };
+    let b = Builder::new(src_dir, dest_dir, entries);
 
     println!("{:?}", b);
-}
-
-#[derive(Debug)]
-struct Builder <'a> {
-    src_dir: &'a str,
-    dest_dir: &'a  str,
-    entries: i32
 }
