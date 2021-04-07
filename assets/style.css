@@ -4,6 +4,8 @@ h1 {
 
 h1, h2 {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  line-height: 1.6rem;
+  letter-spacing: 0.008rem;
 }
 
 .content {

@@ -13,7 +13,7 @@ export function entryTemplate({contents,  modified, tags}: FileEntry, index = fa
   return `<article class="post">
   <div>${contents}</div>
   <time>${modified.toLocaleString('en-US', dateFormat)}</time>
-  ${tags.length > 0 ? `Tags: <ul class="tags">${tags.map(t => `<li class="tags"><a href="tags.html#${t}">${t}</a>`)}</ul>` : ''}
+  ${tags.length > 0 ? `Tags: <ul class="tags">${tags.map(t => `<li class="tags"><a href="tags.html#${t}">${t}</a>`).join('')}</ul>` : ''}
   ${index ? '' : '<nav><a href="index.html">back home</a></nav>'}
 </article>`
 }
@@ -46,7 +46,7 @@ export function tagTemplate(tagList: Map<string, Tag[]>) {
   for (const tag of tags) {
     const entries = tagList.get(tag)
     if (!Array.isArray(entries)) continue
-    data.push(`<dt id="${tag}">${tag}</dt><dd><ul>${entries.map(e => `<li><a href="${e.href}">${e.title}</a>`)}</ul></dd>`)
+    data.push(`<dt id="${tag}">${tag}</dt><dd><ul>${entries.map(e => `<li><a href="${e.href}">${e.title}</a>`).join('')}</ul></dd>`)
   }
   data.push('</dl>')
   return data.join('')
