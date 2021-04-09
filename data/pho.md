@@ -2,7 +2,7 @@ $2021-04-08T19:16:00-07:00
 %soup,chicken,pho
 ## Phở Gà
 
-We're going fucking ✨ IN ✨ TER ✨ NA ✨ TIO ✨ AL ✨ tonight so strap the fuck in and hold on to your goddamn cloth masks you sons of bitches.
+We're going fucking ✨ IN ✨ TER ✨ NA ✨ TION ✨ AL ✨ tonight so strap the fuck in and hold on to your goddamn cloth masks you sons of bitches.
 
 <figure>
 ![Bowls of chicken, onions and scallions waiting for noodles and broth](pho_waiting.jpg)
