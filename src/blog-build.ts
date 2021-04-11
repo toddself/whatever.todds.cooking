@@ -99,7 +99,7 @@ export class BlogBuilder {
     const u = `${basename(fn).replace(/md$/, 'html')}`
 
     blogText[titleLine] = `## [${blogText[titleLine].slice(2)}](${u})\n`
-    const contents = Marked.parse(this.fixQuotes(blogText.join('').trim())).content
+    const contents = Marked.parse(this.fixQuotes(blogText.join('\n').trim())).content
 
     return {
       modified: mtime,
