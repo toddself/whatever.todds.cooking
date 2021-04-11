@@ -3,8 +3,9 @@ import { join, isAbsolute, basename } from 'https://deno.land/std@0.90.0/path/mo
 import { Marked } from 'https://deno.land/x/markdown@v2.0.0/mod.ts'
 
 import { FileEntry } from './file-entry.ts'
-import { entryTemplate, pageTemplate } from './templates.ts'
+import { entryTemplate, pageTemplate, rss } from './templates.ts'
 import { TagBuilder } from './tag-builder.ts'
+import { stripMarkdown } from './strip-markdown.ts'
 
 const ENTRIES_PER_PAGE = 20
 
@@ -22,6 +23,7 @@ export class BlogBuilder {
   _te: TextEncoder
   recent: {[key: string]: string} = {}
   tb: TagBuilder = new TagBuilder()
+  entryList: {[key: string]: FileEntry} = {}
 
   constructor (srcDir: string, destDir: string, entriesPerPage: number = ENTRIES_PER_PAGE) {
     this.srcDir = isAbsolute(srcDir) ? srcDir : join(Deno.cwd(), srcDir)
@@ -43,8 +45,8 @@ export class BlogBuilder {
     }
   }
 
-  fixQuotes (lines: string[]): string[] {
-    const l = [...lines.join('\n')]
+  fixQuotes (lines: string): string {
+    const l = [...lines]
     let inQuote = false
     let inTag = false
     for (let i = 0, ll = l.length; i < ll; i++) {
@@ -68,12 +70,12 @@ export class BlogBuilder {
         }
       }
     }
-    return l.join('').split('\n')
+    return l.join('')
   }
 
-  async buildEntry (fn: string, skipTagging = false): Promise<FileEntry> {
-    const rawContents = this._td.decode(await Deno.readFile(fn))
-    const [modified, tags, ...blogText] = rawContents.split('\n')
+  async parseEntry(fn: string): Promise<FileEntry> {
+    const entry = this._td.decode(await Deno.readFile(fn))
+    const [modified, tags, ...blogText] = entry.split('\n')
 
     let mtime = new Date()
     if (modified.startsWith('$')) {
@@ -92,34 +94,35 @@ export class BlogBuilder {
       blogText.unshift(tags)
     }
 
-    const u = `${basename(fn).replace(/md$/, 'html')}`
     const titleLine = blogText.findIndex(a => a.trim().length > 0)
-    if (!skipTagging) {
-      tagList.forEach(t => this.tb.add(t, blogText[titleLine].slice(2), u))
-    }
-    blogText[titleLine] = `## [${blogText[titleLine].slice(2)}](${u})\n`
-    const contents = Marked.parse(this.fixQuotes(blogText).join('\n').trim()).content
+    const title = blogText[titleLine].slice(2)
+    const u = `${basename(fn).replace(/md$/, 'html')}`
 
-    const entry: FileEntry = {
-      modified: mtime || new Date(),
+    blogText[titleLine] = `## [${blogText[titleLine].slice(2)}](${u})\n`
+    const contents = Marked.parse(this.fixQuotes(blogText.join('').trim())).content
+
+    return {
+      modified: mtime,
+      rawContents: stripMarkdown(blogText.join('')),
       fn,
       contents,
-      tags: tagList
+      tags: tagList,
+      title: title,
+      url: u
     }
-    return entry
+  }
+
+  async buildEntry (fn: string, skipTagging = false): Promise<FileEntry> {
+    const e = await this.parseEntry(fn)
+    if (!skipTagging) {
+      e.tags.forEach(t => this.tb.add(t, e.title || '', e.url || ''))
+    }
+    this.entryList[fn] = e
+    return e
   }
 
   async buildIndex () {
-    // sort by entry date, and create page chunks for paginating
-    const sorted = Object.keys(this.recent)
-      .sort((a, b) => parseInt(b.split(':')[0], 10) - parseInt(a.split(':')[0], 10))
-    const indexPages = []
-    let currIndex = 0
-    for (let i = this.entriesPerPage, sl = sorted.length; currIndex < sl; i += this.entriesPerPage) {
-      if (i > sl) i = sl
-      indexPages.push(sorted.slice(currIndex, i))
-      currIndex = i
-    }
+    const indexPages = this.getPaginatedEntryList()
 
     // make individual index pages for each chunk
     for (let i = 0, il = indexPages.length; i < il; i++) {
@@ -147,6 +150,43 @@ export class BlogBuilder {
     }
   }
 
+  // sort by entry date, and create page chunks for paginating
+  getPaginatedEntryList () {
+    const sorted = Object.keys(this.recent)
+      .sort((a, b) => parseInt(b.split(':')[0], 10) - parseInt(a.split(':')[0], 10))
+    const indexPages = []
+    let currIndex = 0
+    for (let i = this.entriesPerPage, sl = sorted.length; currIndex < sl; i += this.entriesPerPage) {
+      if (i > sl) i = sl
+      indexPages.push(sorted.slice(currIndex, i))
+      currIndex = i
+    }
+    return indexPages
+  }
+
+  async buildRSS() {
+    const rssList = this.getPaginatedEntryList()[0]
+      .map(entry => entry.split(':')[1] || '')
+
+    const entries:FileEntry[] = await Promise.all(rssList.map(entry => {
+      if (this.entryList[entry]) {
+        return this.entryList[entry]
+      } else {
+        return this.parseEntry(entry)
+      }
+    }))
+
+    const rssData = rss(entries)
+
+    const fn = join(this.destDir, `index.rss`)
+    try {
+      await Deno.writeFile(fn, this._te.encode(rssData))
+      console.log('Wrote rss')
+    } catch (e) {
+      console.log('Unable to write rss', e)
+      Deno.exit(1)
+    }
+  }
   async buildTags () {
     const data = this._te.encode(this.tb.generate())
     const fn = join(this.destDir, 'tags.html')
@@ -184,5 +224,6 @@ export class BlogBuilder {
 
     await this.buildIndex()
     await this.buildTags()
+    await this.buildRSS()
   }
 }

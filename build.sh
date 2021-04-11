@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # make blog
 DENO_CMD="${HOME}/.deno/bin/deno"
