@@ -75,7 +75,7 @@ So what is a person to do? Well, they fry their own goddamn chips. I already had
 <figcaption>oh yeah gimme that sexy soft ass focus</figcaption>
 </figure>
 
-Speaking of, I also made two taco fillings: [vegan](https://youtu.be/Ar-IEE_DIEo?t=2) rajas y papas and roasted king oyster mushrooms, as well as [guacamolito sauce](https://www.youtube.com/watch?v=evUWersr7pc) and some pickled red onions.  The mushrooms and "guacamolito" (avocado cream) were from [Flavor](https://bookshop.org/books/ottolenghi-flavor-a-cookbook/9780399581755) which is a pretty awesome book if you're looking to eat less meat (and, to be honest, we all should be.) The book wants you to use oyster mushrooms, but like we're celebrating a fucking birthday here so I'm all about the king ones. They also tend to be a little "meatier", plus you can use them to make some pretty good [vegan](https://www.youtube.com/watch?v=Co_MeAON3ew) [fakin' bacon](https://www.seriouseats.com/recipes/2014/02/crispy-smoked-mushroom-bacon-bits-vegan-recipe.html).  
+Speaking of, I also made two taco fillings: [vegan](https://youtu.be/Ar-IEE_DIEo?t=2) rajas y papas and roasted king oyster mushrooms, as well as [guacamolito sauce](https://www.youtube.com/watch?v=evUWersr7pc) and some pickled red onions.  The mushrooms and "guacamolito" (avocado cream) were from [Flavor](https://bookshop.org/books/ottolenghi-flavor-a-cookbook/9780399581755) which is a pretty awesome book if you're looking to eat less meat (and, to be honest, we all should be.) The book wants you to use oyster mushrooms, but like we're celebrating a fucking birthday here so I'm all about the king ones. They also tend to be a little "meatier", plus you can use them to make some pretty good [vegan](https://youtu.be/Ar-IEE_DIEo?t=2) [fakin' bacon](https://www.seriouseats.com/recipes/2014/02/crispy-smoked-mushroom-bacon-bits-vegan-recipe.html).  
 
 <figure>
 ![potatoes and peppers](tacos_rajas.jpg)
@@ -84,7 +84,7 @@ Speaking of, I also made two taco fillings: [vegan](https://youtu.be/Ar-IEE_DIEo
 
 The rajas y papas were deep fried diced potatoes (as mentioned above), along with poblano peppers I roasted on the stove, skinned & seeded and then sliced into strips. The cream sauce was soaked cashews, water, a little bit of coconut cream, nutritional yeast, white miso, salt and champagne vinegar blitzed until smooth in my blender. Once all the pieces were done, I combined them on the stove top over low heat.
 
-It's a good thing I spent all this time cooking for the family because the kids devoured what was on their plates. Like not a single goddamn scrap left. Who thought they liked [vegan](https://www.youtube.com/watch?v=Co_MeAON3ew) food? 
+It's a good thing I spent all this time cooking for the family because the kids devoured what was on their plates. Like not a single goddamn scrap left. Who thought they liked [vegan](https://youtu.be/Ar-IEE_DIEo?t=2) food? 
 
 Oh. 
 
