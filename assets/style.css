@@ -69,6 +69,26 @@ dt, dd {
  padding: .5rem;
 }
 
+.sf {
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}
+
+.subscribe {
+  color: #1F2F6F;
+  cursor: pointer;
+  display: inline-block;
+}
+
+form {
+  padding: 0;
+  margin: 0;
+}
+
+
 @media (max-width: 1000px) {
   .content {
     width: 90%;
@@ -86,6 +106,10 @@ dt, dd {
   }
 
   a {
+    color: #AFF3FE;
+  }
+
+  .subscribe {
     color: #AFF3FE;
   }
 

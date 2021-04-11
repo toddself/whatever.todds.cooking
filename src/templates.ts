@@ -33,10 +33,28 @@ export function pageTemplate(title: string, contents: string|string[], paginatio
   <body>
   <header><a href="/" class="title"><h1>${title ? title : "whatever todd’s cooking"}</h1></a></header>
   <main class="content">
+  <div style="padding-bottom: .2rem;">
+    <span class="subscribe">subscribe via email &raquo;</span>
+    <span class="hidden sf">
+    <form action="https://tinyletter.com/whatever_todds_cooking" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/whatever_todds_cooking', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><label for="tlemail">Enter your email address: <input type="text" style="width:140px" name="email" id="tlemail"</label> <input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><a href="https://tinyletter.com" style="font-size: .8rem;" target="_blank">powered by TinyLetter</a></form>
+    </span>
+  </div>
   ${Array.isArray(contents) ? contents.join('') : contents}
   </main>
   ${Array.isArray(pagination) ? `<nav class="content">Other posts: <ol class="tags">${pagination.map((p, i) => `<li class="tags"><a href="${p}">${i > 0 ? `page ${i}` : 'home'}</a>`)}</ol></nav>` : ''}
-  <footer class="content">All content copyright © 2021, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a> Source: <a href="https://github.com/toddself/whatever.todds.cooking">github</a></footer>
+  <footer class="content">Find me on: <a href="https://instagram.com/@whatever_todds_cooking">Instagram</a> <a href="httsp://twitter.com/@todds_cooking/">Twitter</a><br>All content copyright © 2021, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a> Source: <a href="https://github.com/toddself/whatever.todds.cooking">github</a></footer>
+  <script>
+  const f = document.querySelector('.sf');
+  const h = 'hidden';
+  document.querySelector('.subscribe').addEventListener('click', () => {
+    if (!f) return
+    if (f.classList.contains(h)) {
+      f.classList.remove(h)
+    } else {
+      f.classList.add(h)
+    }
+  })
+  </script>
   </body>
 </html>`
 }
