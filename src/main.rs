@@ -32,7 +32,7 @@ fn main() {
     let src_dir = matches.value_of("src").unwrap();
     let dest_dir = matches.value_of("dest").unwrap();
     let entries: i32 = matches.value_of("entries").unwrap().parse().unwrap();
-    let b = Builder::new(src_dir, dest_dir, entries);
+    let b = Builder::new(src_dir, dest_dir);
 
     println!("{:?}", b);
 }
