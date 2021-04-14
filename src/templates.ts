@@ -1,5 +1,9 @@
+import { join } from 'https://deno.land/std@0.90.0/path/mod.ts'
 import { FileEntry } from './file-entry.ts'
 import { Tag } from './tag-builder.ts'
+
+const styleFile = join(Deno.cwd(), 'assets/style.css')
+const style = new TextDecoder('utf-8').decode(await Deno.readFile(styleFile)).replace(/\n/g, '')
 
 const dateFormat: Intl.DateTimeFormatOptions = {
   weekday: "long",
@@ -26,9 +30,9 @@ export function pageTemplate(title: string, contents: string|string[], paginatio
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Whatever Todd‘s Cooking. In a blog">
     <title>${title ? title : 'whatever todd‘s cooking'}</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="Whatever Todd's Cooking, but in RSS" href="https://whatever.todds.cooking/index.rss">
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82fdb0078f0f4fefbdc9c3788047400d"}'></script>
+    <style>${style}</style>
   </head>
   <body>
   <header><a href="/" class="title"><h1>${title ? title : "whatever todd’s cooking"}</h1></a></header>
