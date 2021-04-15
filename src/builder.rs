@@ -1,6 +1,6 @@
 use std::{error::Error, fmt};
 use std::path::{Path, PathBuf};
-use std::fs::{DirBuilder, read_dir, read}; //, read_to_string, write};
+use std::fs::{DirBuilder, read_dir, read_to_string};
 use std::io;
 use std::str;
 
@@ -33,9 +33,9 @@ impl Error for BuilderDirError {
 pub struct FileEntry <'b> {
     pub modified: DateTime<FixedOffset>, 
     pub filename: &'b str,
-    pub raw_text: &'b str,
-    pub contents: &'b str,
-    pub tags: &'b Vec<&'b str>,
+    pub raw_text: String,
+    pub contents: String,
+    pub tags: Vec<String>,
     pub title: &'b str,
     pub url: &'b str,
 }
@@ -45,6 +45,7 @@ pub struct Builder <'a> {
     pub src_dir: &'a Path,
     pub dest_dir: &'a  Path,
     pub files: Vec<PathBuf>,
+    pub entries: Option<Vec<FileEntry<'a>>>,
 }
 
 impl<'a> Builder<'a> {
@@ -66,22 +67,32 @@ impl<'a> Builder<'a> {
 
         let files= match get_entries(s) {
             Ok(e) => e,
-            Err(e) => vec![],
+            Err(_e) => vec![],
         };
 
         Ok(Builder{
             src_dir,
             dest_dir,
             files,
+            entries: None
         })
     }
 
-    pub fn parse_entry(filename: &'a str) -> Result<&'a FileEntry<'a>, std::io::Error> {
-        let buf:&str = str::from_utf8(&read(filename)?).unwrap();
+    pub fn initialize(&self) {
+        let mut entries:Vec<FileEntry> = vec![];
+        for file in self.files.iter() {
+            let filename = file.to_str().unwrap();
+            entries.push(self.parse_entry(filename).unwrap());
+        }
+    }
+    
+    fn parse_entry(&self, filename: &'a str) -> Result<FileEntry<'a>, std::io::Error> {
+        let buf = read_to_string(filename).unwrap();
 
         let mut lines:Vec<&str> = buf.split("\n").collect();
         let date = lines[0];
         let tags = lines[1];
+
         let pub_date = match date.chars().next().unwrap() {
            '$' => {
                 lines.remove(0);
@@ -90,20 +101,22 @@ impl<'a> Builder<'a> {
             _ => DateTime::<FixedOffset>::from(Local::now())
         };
 
+        // todo figure out tag list without borrowing
         let tag_list = match tags.chars().next().unwrap() {
             '%' => {
                 lines.remove(0);
-                &tags[1..].split(',').collect()
+                let tags:Vec<String> = tags.split(',').map(|e| String::from(e)).collect();
+                tags
             },
-            _ => &vec![],
+            _ => vec![],
         };
 
-        let entry = &FileEntry{
+        let entry = FileEntry{
             modified: pub_date,
             filename,
             tags: tag_list,
-            raw_text: buf,
-            contents: buf,
+            raw_text: lines.join("\n").clone(),
+            contents: lines.join("\n").clone(),
             title: "",
             url: "",
         };
@@ -113,7 +126,7 @@ impl<'a> Builder<'a> {
 }
 
 fn get_entries(src: &str) -> io::Result<Vec<PathBuf>> {
-    let mut entries = read_dir(src)?
+    let entries = read_dir(src)?
         .map(|res| res.map(|e| e.path()))
         .collect::<Result<Vec<_>, io::Error>>()?;
     Ok(entries)
