@@ -4,7 +4,9 @@ use std::fs::{DirBuilder, read_dir, read_to_string};
 use std::io;
 use std::str;
 
+use comrak::{markdown_to_html, ComrakOptions};
 use chrono::{DateTime, FixedOffset, Local};
+use voca_rs::strip::strip_tags;
 
 #[derive(Debug)]
 pub struct BuilderDirError {
@@ -30,14 +32,14 @@ impl Error for BuilderDirError {
 }
 
 #[derive(Debug)]
-pub struct FileEntry <'b> {
+pub struct FileEntry {
     pub modified: DateTime<FixedOffset>, 
-    pub filename: &'b str,
+    pub filename: String,
     pub raw_text: String,
     pub contents: String,
     pub tags: Vec<String>,
-    pub title: &'b str,
-    pub url: &'b str,
+    pub title: String,
+    pub url: String,
 }
 
 #[derive(Debug)]
@@ -45,7 +47,7 @@ pub struct Builder <'a> {
     pub src_dir: &'a Path,
     pub dest_dir: &'a  Path,
     pub files: Vec<PathBuf>,
-    pub entries: Option<Vec<FileEntry<'a>>>,
+    pub entries: Option<Vec<FileEntry>>,
 }
 
 impl<'a> Builder<'a> {
@@ -81,12 +83,12 @@ impl<'a> Builder<'a> {
     pub fn initialize(&self) {
         let mut entries:Vec<FileEntry> = vec![];
         for file in self.files.iter() {
-            let filename = file.to_str().unwrap();
-            entries.push(self.parse_entry(filename).unwrap());
+            entries.push(self.parse_entry(file).unwrap());
         }
     }
     
-    fn parse_entry(&self, filename: &'a str) -> Result<FileEntry<'a>, std::io::Error> {
+    fn parse_entry(&self, file: &PathBuf) -> Result<FileEntry, std::io::Error> {
+        let filename = file.to_str().unwrap();
         let buf = read_to_string(filename).unwrap();
 
         let mut lines:Vec<&str> = buf.split("\n").collect();
@@ -111,14 +113,41 @@ impl<'a> Builder<'a> {
             _ => vec![],
         };
 
+        let url = match file.iter().last() {
+            Some(u) => match u.to_str() {
+                Some(u) => String::from(u),
+                None => String::from(filename),
+            },
+            None => String::from(filename),
+        };
+
+        let mut entry_data = lines.join("\n");
+
+        let mut title = String::new();
+        let mut start = 0;
+        for &line in lines.iter() {
+            if line.starts_with("##") {
+                let t = line[2..].trim();
+                title.push_str(t);
+                let header = format!("## [{}]({})", t, url.as_str());
+                let end = start + line.len();
+                entry_data.replace_range(start..end, header.as_str());
+                break;
+            }
+            start = start + line.len();
+        };
+        
+        let contents = markdown_to_html(entry_data.as_str(), &ComrakOptions::default());
+        let raw_text = strip_tags(contents.as_str());
+
         let entry = FileEntry{
             modified: pub_date,
-            filename,
+            filename: String::from(filename),
             tags: tag_list,
-            raw_text: lines.join("\n").clone(),
-            contents: lines.join("\n").clone(),
-            title: "",
-            url: "",
+            raw_text,
+            contents,
+            title,
+            url,
         };
 
         Ok(entry)
