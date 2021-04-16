@@ -83,7 +83,9 @@ impl<'a> Builder<'a> {
     pub fn initialize(&self) {
         let mut entries:Vec<FileEntry> = vec![];
         for file in self.files.iter() {
-            entries.push(self.parse_entry(file).unwrap());
+            let entry = self.parse_entry(file).unwrap();
+            println!("{:?}", entry);
+            entries.push(entry);
         }
     }
     
@@ -98,7 +100,12 @@ impl<'a> Builder<'a> {
         let pub_date = match date.chars().next().unwrap() {
            '$' => {
                 lines.remove(0);
-                DateTime::parse_from_rfc2822(&date[1..]).unwrap()
+                let date = &date[1..];
+                println!("{} {}", filename, date);
+                match DateTime::parse_from_rfc3339(&date) {
+                    Ok(d) => d,
+                    Err(_e) => DateTime::<FixedOffset>::from(Local::now()),
+                }
            },
             _ => DateTime::<FixedOffset>::from(Local::now())
         };
@@ -107,7 +114,7 @@ impl<'a> Builder<'a> {
         let tag_list = match tags.chars().next().unwrap() {
             '%' => {
                 lines.remove(0);
-                let tags:Vec<String> = tags.split(',').map(|e| String::from(e)).collect();
+                let tags:Vec<String> = tags[1..].split(',').map(|e| String::from(e)).collect();
                 tags
             },
             _ => vec![],
@@ -137,7 +144,10 @@ impl<'a> Builder<'a> {
             start = start + line.len();
         };
         
-        let contents = markdown_to_html(entry_data.as_str(), &ComrakOptions::default());
+        let mut comrak_options = ComrakOptions::default();
+        comrak_options.render.unsafe_ = true;
+        comrak_options.parse.smart = true;
+        let contents = markdown_to_html(entry_data.as_str(), &comrak_options);
         let raw_text = strip_tags(contents.as_str());
 
         let entry = FileEntry{
