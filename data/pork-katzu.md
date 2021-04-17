@@ -1,6 +1,8 @@
-$2021-03-21T18:54:00-07:00
-%tonkatzu,fennel
-## Tonkatzu (pork cutlets) & a Fennel, Red Onion & Parsley salad
+---
+date: 2021-03-21T18:54:00-07:00
+tags: tonkatzu,fennel
+title: Tonkatzu (pork cutlets) & a Fennel, Red Onion & Parsley salad
+---
 
 This is one of my kids favorite meals: thin pounded pork loin, breaded and fried, with rice. They're not a huge fan of the salad, but you need something to cut through the fat of the katzu and the sweetness of the [katzu sauce](http://tonkatsu.bulldog.jp/bulldogsauce/).
 

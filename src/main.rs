@@ -41,8 +41,9 @@ fn main() {
     let dest_dir = matches.value_of("dest").unwrap();
     let template_dir = matches.value_of("template_dir").unwrap();
     let count = matches.value_of("entries").unwrap().parse().unwrap();
-    let b = Builder::new(src_dir, dest_dir, template_dir, count).unwrap();
-    b.build();
-
-    println!("{:?}", b);
+    let mut b = Builder::new(src_dir, dest_dir, template_dir, count).unwrap();
+    match b.build() {
+        Ok(_a) => println!("Blog build!"),
+        Err(e) => println!("{:?}", e),
+    };
 }

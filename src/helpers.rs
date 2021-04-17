@@ -37,7 +37,7 @@ pub fn get_entries(src: &str) -> io::Result<Vec<PathBuf>> {
     Ok(entries)
 }
 
-pub fn truncate_text(text: &str) -> &str {
+pub fn _truncate_text(_text: &str) -> &str {
     return "";
 
 // const truncateLength = 200
