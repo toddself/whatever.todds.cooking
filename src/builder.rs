@@ -134,10 +134,12 @@ impl<'a> Builder<'a> {
         for entry_set in self.entries.chunks(self.num_per_page as usize) {
             let mut entries:Vec<String> = vec![];
             for entry in entry_set {
+                let has_tags = if entry.tags.len() > 0 { true } else { false };
                 let post_data = json!({
                     "title": entry.title,
                     "contents": entry.contents,
                     "tags": entry.tags,
+                    "has_tags": has_tags,
                     "modified": entry.modified.format(DATE_FORMAT).to_string(),
                 });
                 let rendered = self.hbs.render("entry", &post_data)?;
