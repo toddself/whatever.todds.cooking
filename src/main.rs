@@ -1,4 +1,5 @@
 mod builder;
+mod helpers;
 pub use crate::builder::Builder;
 
 use clap::{Arg, App};
@@ -27,12 +28,21 @@ fn main() {
             .help("How many entries on the home page")
             .takes_value(true)
             .default_value("20"))
+        .arg(Arg::with_name("template_dir")
+            .short("t")
+            .long("template_dir")
+            .value_name("TEMPLATE_DIR")
+            .help("Location of page templates")
+            .takes_value(true)
+            .default_value("templates"))
         .get_matches();
 
     let src_dir = matches.value_of("src").unwrap();
     let dest_dir = matches.value_of("dest").unwrap();
-    let b = Builder::new(src_dir, dest_dir).unwrap();
-    b.initialize();
+    let template_dir = matches.value_of("template_dir").unwrap();
+    let count = matches.value_of("entries").unwrap().parse().unwrap();
+    let b = Builder::new(src_dir, dest_dir, template_dir, count).unwrap();
+    b.build();
 
     println!("{:?}", b);
 }

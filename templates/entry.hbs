@@ -1,0 +1,12 @@
+<article class="post">
+  <div>{{{contents}}}</div>
+  <time>{{modified}}</time>
+  {{#if has_tags}}
+  Tags: <ul class="tags">
+  {{#each tags}}
+    <li class="tags"><a href="tags.html#{{this}}">{{this}}</li>
+  {{/each}}
+  </ul>
+  {{/if}}
+  {{#if index}}<nav><a href="index.html">back home</a></nav>{{/if}}
+</article>
