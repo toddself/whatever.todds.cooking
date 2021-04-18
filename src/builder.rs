@@ -181,11 +181,10 @@ impl<'a> Builder<'a> {
                 if count == 0 {
                     rss_data.push(json!({
                         "title": entry.title,
-                        "description": truncate_text(entry.raw_text.as_str(), 200),
+                        "description": truncate_text(entry.raw_text.as_str(), 300),
                         "modified": entry.modified.format(DATE_FORMAT).to_string(),
                         "url": entry.url,
                     }));
-                    println!("{:?}", rss_data);
                 }
 
                 // collect the tags for this post and associate them to the entry

@@ -44,22 +44,46 @@ pub fn truncate_text(text: &str, truncate_len: usize) -> &str {
                 false => {
                     let truncated = text.split_at(truncate_len);
                     let prev_ws = match truncated.0.rfind(char::is_whitespace) {
-                        Some(i) => truncate_len - i,
+                        Some(i) => {
+                            let mut ws = i;
+                            loop {
+                                if text.is_char_boundary(ws) {
+                                    break;
+                                }
+                                ws -= 1;
+                            }
+                            ws
+                        },
                         None => 0,
                     };
                     let next_ws = match truncated.1.find(char::is_whitespace) {
-                        Some(i) => i,
+                        Some(i) => {
+                            let mut ws = truncate_len + i;
+                            loop {
+                                if text.is_char_boundary(ws) {
+                                    break;
+                                }
+                                ws += 1;
+                            }
+                            ws
+                        },
                         None => text.len(),
                     };
                     match next_ws > prev_ws {
-                        true => text.split_at(prev_ws).0,
-                        false => text.split_at(next_ws).0,
+                        true => {
+                            println!("Splitting at {}", prev_ws);
+                            text.split_at(prev_ws).0
+                        },
+                        false => {
+                            println!("Splitting at {}", next_ws);
+                            text.split_at(next_ws).0
+                        }
                     }
                 },
             }
         }, 
         None => {
-            text.split_at(truncate_len).0
+            text
         },
     }
 }
