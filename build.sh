@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # make blog
+rustup toolchain install stable
 cargo run data dist
 
 # handle images
