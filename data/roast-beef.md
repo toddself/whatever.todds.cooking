@@ -1,6 +1,8 @@
-$2021-03-28T10:26:00-07:00
-%roast-beef,potatoes,yorkshire-pudding
-## Roast Beef, Mashed Potatoes, Yorkshire Pudding, Sautéed Corn & Mushroom-Onion Gravy
+---
+date: 2021-03-28T10:26:00-07:00
+tags: roast-beef,potatoes,yorkshire-pudding
+title: Roast Beef, Mashed Potatoes, Yorkshire Pudding, Sautéed Corn & Mushroom-Onion Gravy
+---
 
 I forgot to take photos of most of this meal, so like, I dunno, maybe I'm making it all up.  But I had two missions for today:
 
@@ -14,7 +16,9 @@ Also who can guess out of all the food I made, what _two_ things did my children
 Lets start off with the easiest part: the roast beef. I got a shoulder clod roast from the local butcher (no, seriously) because it's a ton cheaper than a standing rib roast, tastier and less prone to drying out than a bottom round, and unlike the standing rib roast, makes great sandwiches the next day since there is very little intramuscular fat that just ends up waxy and inedible. Sure, it's not nearly as instagram worthy, but who the fuck uses instagram? 
 
 <figure>
+
 ![A foggy picture of roast beef](roast_beef.jpg)
+
 <figcaption>Get fucked Ansel Adams</figcapture>
 </figure>
 
@@ -29,7 +33,9 @@ School hasn't happened in a fucking year, so we're just teaching them how to hav
 Speaking of the British, lets talk about Yorkshire Pudding. 
 
 <figure>
+
 ![A golden brown yorkshire pudding](roast_beef_yorkshire_pudding.jpg)
+
 <figcaption>Yeah they call this pudding and used to subjugate the majority of the world. I don't get it either.</figcaption>
 </figure>
 
@@ -38,7 +44,9 @@ It is in my opinion though that if you're gonna make a roast you'd better make a
 I used Kenji's [Yorkshire Pudding](https://www.seriouseats.com/recipes/2015/12/the-best-yorkshire-pudding-popover-recipe.html) recipe since it really is _the best_. There wasn't enough beef fat (unless you're doing a standing rib roast there never is) to get all the fat I needed so I used some Low Acid Canadian Oil. (Clever bit of marketing there, Canada, eh?) The gravy was some mushrooms and onions, cooked in butter until they got real nice and soft, some flour to make a roux and then chicken stock and drippings from the beef, along with some worcestershire and soy sauce for complexity and depth. I use 1oz (by weight) of butter and flour each to 2 cups of liquid. If you want it thicker you might be a serial killer.
 
 <figure>
+
 ![mushroom onion gravy](roast_beef_gravy.jpg)
+
 <figcaption>I'm pretty sure this flows in Guy Fieri's veins</figcaption>
 </figure>
 

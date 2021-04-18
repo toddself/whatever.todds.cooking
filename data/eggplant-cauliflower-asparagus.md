@@ -1,7 +1,8 @@
-$2021-04-17T07:21:00-07:00
-%eggplant,cauliflower,asparagus
-
-## Eggplant, Cauliflower &amp; Asparagus
+---
+date: 2021-04-17T07:21:00-07:00
+tags: eggplant,cauliflower,asparagus
+title: Eggplant, Cauliflower &amp; Asparagus
+---
 
 I promise every time I don't write something for a bit I'm not going to start it off with some trite [been a long time since I rapped at ya](https://www.theonion.com/anchowers-gotta-spend-some-time-away-1819584766) bullshit, but fuck.  I got my second Pfizer vaccine on Monday AM and by Monday night I was in bed, fever, chills and totally laid up for a good 36 hours, so this week has been entirely dedicated to make-up from missing a day and a half of it.
 
@@ -18,7 +19,9 @@ Although, to be quite honest, there are few things I like more than grilled eggp
 I ended up quartering three small eggplants (the smaller and firmer the eggplant, the less seeds it has, and the less seeds it has the less bitter is) and brushing them with olive oil and salt and putting them on a very hot grill, rotating them to get those "oh you grilled this?" hash marks, but generally letting the eggplant cook until it was real well done &#151; a bit burnt on the edges. I then cut it into medium sized chunks and tossed it in a "dressing" of tahini, lemon juice, minced garlic, salt, pepper, chopped parsley (remember: curly parsley is a tool of the 1% designed to keep us in servitude, so use flat-leaf) and some torn mint. And before someone is all "WELL AHCKSHULLY TORN MINT TASTES DIFFERENT" no it doesn't. I tore it because I was lazy and forgot the mint until I had already cleaned the cutting board and knife and put it away.
 
 <figure>
+
 ![babaganoush type eggplant salad](eggplant_eggplant.jpg)
+
 <figcaption>this tasted better than it looked</figcaption>
 </figure>
 
@@ -31,7 +34,9 @@ Fuck.  Wait.
 So I grilled the cauliflower, and then life handed me lemons (actually it was one of my kids who I made go food shopping with me to see if I could pique their curiosity about food and ask to try something new but fucking fat chance there) so I made a lemon vinaigrette with some olive oil, and chopped up some celery (if you can get celery leaves on them, the leaves are really my favorite part), roasted chopped hazelnuts and golden raisins. I grilled the cauliflower over high heat for a good thirty minutes probably which made the outside bits super charred and nutty and the inside bits a little soft and steamy. (Side note: you really can't over good cauliflower like you can broccoli or other green vegetables. It'll get soft but then it's like even better?)
 
 <figure>
+
 ![cauliflower salad](eggplant_cauliflower_salad.jpg)
+
 </figure>
 
 The last thing I made was asparagus. Well, I attempted to make asparagus. I guess I made some of the asparagus. I made the paragus, because I certainly didn't make the ass.
@@ -47,7 +52,9 @@ Despite the fact that OH MY FUCKING GOD ARE YOU GODDAMN KIDDING ME YOU KNOCKED O
 (Also as a parent you learn that there are questions you really want to ask but you'll never get a satisfying answer from so you have to not ask them because the answer is so not what you wanted to hear that it can make the situation even more annoying. "What were you thinking" is really the top of the list, because the actual answer is "I wasn't", but there's really no answer that fits that question that makes the situation better.)
 
 <figure>
+
 ![asparagus](eggplant_asparagus.jpg)
+
 <figcaption>these were the only salvageable bits</figcaption>
 </figure>
 

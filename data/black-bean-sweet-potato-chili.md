@@ -1,6 +1,8 @@
-$2021-03-19T21:00:00-0700
-%black-beans,sweet-potato,chili
-## Black Bean & Sweet Potato Chili
+---
+date: 2021-03-19T21:00:00-07:00
+tags: black-beans,sweet-potato,chili
+title: Black Bean & Sweet Potato Chili
+---
 
 Some simple "chili".  Whatever. It's got:
 * a sweet potato, peeled and roughly cubed

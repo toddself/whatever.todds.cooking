@@ -1,6 +1,8 @@
-$2021-03-20T09:23:00-0700
-%toffee,dessert
-## Saltine Toffee
+---
+date: 2021-03-20T09:23:00-07:00
+tags: toffee,dessert
+title: Saltine Toffee
+---
 
 Somehow I got roped into making a dessert for our kid's school's "dessert dash" for their fundraising auction. I guess when you're married to a PTA member, you're unwittingly agreeing to these things, but I digress.  Since I'm lazy I made Saltine Toffee.
 
