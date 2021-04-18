@@ -1,6 +1,8 @@
-$2021-03-23T21:03:00-07:00
-%potatoes
-## Potato Salad
+---
+date: 2021-03-23T21:03:00-07:00
+tags: potatoes
+title: Potato Salad
+---
 
 I mean potato salad is sort of like one of those things that you don't really use a recipe for in my mind? It's potatoes, boiled, cooled and like mayo essentially. Tonight's was a hard boiled egg, some red onion, celery, carrot and bread & butter pickles diced up and the eponymous potatoes.
 

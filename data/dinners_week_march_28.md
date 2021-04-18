@@ -1,6 +1,8 @@
-$2021-03-28T15:07:00-07:00
-%weekly-menu
-## Dinners for the Week of March 29
+---
+date: 2021-03-28T15:07:00-07:00
+tags: weekly-menu
+title: Dinners for the Week of March 29
+---
 
 In rotation this week:
 

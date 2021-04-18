@@ -126,12 +126,33 @@ impl<'a> Builder<'a> {
             let entry = self.parse_entry(file).unwrap();
             self.entries.push(entry);
         }
+        self.entries.sort_by(|a, b| {
+            let bd = b.modified.signed_duration_since(a.modified);
+            let ad = a.modified.signed_duration_since(b.modified);
+            ad.cmp(&bd)
+        });
         Ok(self.build_blog()?)
     }
 
     fn build_blog(&self) -> Result<(), Box<(dyn Error + 'static)>> {
         let mut count = 0;
-        for entry_set in self.entries.chunks(self.num_per_page as usize) {
+        let num_per_page = self.num_per_page as usize;
+        let mut pagination:Vec<String> = vec![];
+
+        if self.entries.len() > num_per_page {
+            let mut num_pages = self.entries.len() / num_per_page;
+            if self.entries.len() % num_per_page > 0 {
+                num_pages += 1;
+            }
+            for index in 0..num_pages {
+                pagination.push(match index {
+                    0 => String::from("home"),
+                    _ => format!("page {}", index)
+                });
+            }
+        }
+
+        for entry_set in self.entries.chunks(num_per_page) {
             let mut entries:Vec<String> = vec![];
             for entry in entry_set {
                 let has_tags = if entry.tags.len() > 0 { true } else { false };
@@ -146,8 +167,7 @@ impl<'a> Builder<'a> {
 
                 let page_data = json!({
                     "title": "whatever todd's cooking",
-                    "contents": vec![rendered.as_str()],
-                    "pagination": false
+                    "contents": vec![rendered.as_str()]
                 });
                 let full_post = self.hbs.render("index", &page_data)?;
                 let output_fn = self.dest_dir.join(entry.url.as_str());
@@ -162,7 +182,7 @@ impl<'a> Builder<'a> {
             let page_data = json!({
                 "title": "whatever todd's cooking",
                 "contents": entries,
-                "pagingation": false
+                "pagination": pagination,
             });
             let output_fn = self.dest_dir.join(index_fn.as_str());
             let index_page = self.hbs.render("index", &page_data)?;

@@ -1,17 +1,23 @@
-$2021-04-03T09:27:00-07:00
-%eggs,bacon,toast
-## Eggs, Bacon & Toast
+---
+date: 2021-04-03T09:27:00-07:00
+tags: eggs,bacon,toast
+title: Eggs, Bacon & Toast
+---
 
 There are only a few things in this world that I prefer to make if I'm going to eat it and scrambled eggs are probably at the top of that list, especially since I moved to Seattle. Pre-pandemic it was difficult to find a place that made scrambled eggs that weren't just downright overcooked or like, god forbid, fucking bland. I have no clue what people do to make an egg taste bland, but like, it happens. So, most of the time I get them over easy since it's much harder to fuck that one up. Plus, like who doesn't love a runny yolk?  Since this pandemic started though they're strictly a make-at-home or at a quarantine friends house &#151; unless they're wrapped in a burrito, eggs do not travel.
 
 <figure>
+
 ![Scrambled eggs, bacon and toast](eggs_overview.jpg)
+
 </figure>
 
 Well, the other morning I entered the Twilight Zone when my son asked me if I could make him eggs, bacon and toast for breakfast because he didn't want his standard frozen shitty waffle. (No kidding, out of all the food he could eat in the morning, most of the time its a chocolately chip waffle.  Note that it's not a _chocolate_ chip waffle. No, that would be too fucking far since they'd have to actually put, you know, chocolate in the chips.) I was more than happy to oblige this ask, so I made eggs, bacon and toast.
 
 <figure>
+
 ![scrambled eggs extreme close up](eggs_close_up.jpg)
+
 </figure>
 
 There are a lot of ways to make creamy scrambled eggs, and there are a lot of ways to make fluffy scrambled eggs. This method tends to fall in the middle &#151; creamy and moist eggs, but with some decent curd formation and a bit of lightness in them. Also it really doesn't work with less than 4 eggs since there's not enough mass to easily control the heat. So, get your eggs, crack 'em, add a splash of milk or cream or nothing and a good pinch of salt and beat them until they're homogenous. These should ideally sit for about 15 minutes, but who the fuck has that amount of time in the morning to wait for eggs? Not this chunky lover, for sure. 
