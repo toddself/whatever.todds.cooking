@@ -137,8 +137,9 @@ impl<'a> Builder<'a> {
     fn build_blog(&self) -> Result<(), Box<(dyn Error + 'static)>> {
         let mut count = 0;
         let num_per_page = self.num_per_page as usize;
-        let mut pagination:Vec<String> = vec![];
 
+        // create a list of all the indexes we're gonna output
+        let mut pagination:Vec<_> = vec![];
         if self.entries.len() > num_per_page {
             let mut num_pages = self.entries.len() / num_per_page;
             if self.entries.len() % num_per_page > 0 {
@@ -146,8 +147,14 @@ impl<'a> Builder<'a> {
             }
             for index in 0..num_pages {
                 pagination.push(match index {
-                    0 => String::from("home"),
-                    _ => format!("page {}", index)
+                    0 => json!({
+                        "name": "home",
+                        "url": "index.html",
+                    }),
+                    _ => json!({
+                        "name": format!("page {}", index),
+                        "url": format!("index{}.html", index),
+                    }),
                 });
             }
         }
@@ -157,29 +164,20 @@ impl<'a> Builder<'a> {
         let mut tag_map:BTreeMap<String, Vec<Value>> = BTreeMap::new();
 
         for entry_set in self.entries.chunks(num_per_page) {
-            let mut entries:Vec<String> = vec![];
             for entry in entry_set {
-                let has_tags = if entry.tags.len() > 0 { true } else { false };
                 let post_data = json!({
                     "title": entry.title,
                     "contents": entry.contents,
                     "tags": entry.tags,
-                    "has_tags": has_tags,
                     "url": entry.url,
                     "modified": entry.modified.format(DATE_FORMAT).to_string(),
                 });
                 let rendered = self.hbs.render("entry", &post_data)?;
-
-                let page_data = json!({
-                    "title": "whatever todd's cooking",
-                    "contents": vec![rendered.as_str()]
-                });
-                let full_post = self.hbs.render("index", &page_data)?;
                 let output_fn = self.dest_dir.join(entry.url.as_str());
                 println!("Writing {} to {:?}", entry.title, output_fn);
-                fs::write(output_fn, full_post)?;
-                entries.push(rendered);
+                fs::write(output_fn, rendered)?;
 
+                // this is one of the latest posts, add it to the rss list
                 if count == 0 {
                     rss_data.push(json!({
                         "title": entry.title,
@@ -187,8 +185,10 @@ impl<'a> Builder<'a> {
                         "modified": entry.modified.format(DATE_FORMAT).to_string(),
                         "url": entry.url,
                     }));
+                    println!("{:?}", rss_data);
                 }
 
+                // collect the tags for this post and associate them to the entry
                 for tag in entry.tags.iter() {
                     let tag_entry = json!({
                         "url": entry.url,
@@ -204,6 +204,15 @@ impl<'a> Builder<'a> {
                 }
             }
 
+            // get whole chunk of posts to generate the paginated indexes
+            let entries:Vec<_> = entry_set.into_iter().map(|entry| json!({
+                "title": entry.title,
+                "contents": entry.contents,
+                "tags": entry.tags,
+                "url": entry.url,
+                "modified": entry.modified.format(DATE_FORMAT).to_string(),
+            })).collect();
+
             let page_data = json!({
                 "title": "whatever todd's cooking",
                 "contents": entries,
@@ -213,19 +222,7 @@ impl<'a> Builder<'a> {
             });
 
             let index_fn = match count {
-                0 => {
-                    let rss_data = json!({
-                        "title": "whatever todd's cooking",
-                        "entries": rss_data,
-                        "year": now.format("%Y").to_string(),
-                        "pub_date": now.format("%a, %e %b, %Y %T %Z").to_string(),
-                    });
-                    let rss_fn = self.dest_dir.join("index.rss");
-                    let rss_feed = self.hbs.render("rss", &rss_data)?;
-                    println!("Writing RSS feed to {:?}", rss_fn);
-                    fs::write(rss_fn, rss_feed)?;
-                    String::from("index.html")
-                },
+                0 => String::from("index.html"),
                 _ => format!("index{}.html", count),
             };
 
@@ -236,6 +233,19 @@ impl<'a> Builder<'a> {
             count += 1;
         }
 
+        // generate rss with latest data
+        let rss_data = json!({
+            "title": "whatever todd's cooking",
+            "entries": rss_data,
+            "year": now.format("%Y").to_string(),
+            "pub_date": now.format("%a, %e %b, %Y %T %Z").to_string(),
+        });
+        let rss_fn = self.dest_dir.join("index.rss");
+        let rss_feed = self.hbs.render("rss", &rss_data)?;
+        println!("Writing RSS feed to {:?}", rss_fn);
+        fs::write(rss_fn, rss_feed)?;
+
+        // generate tag list
         let tags_data = json!({"tags": tag_map});
         let tags_fn = self.dest_dir.join("tags.html");
         let tags_page = self.hbs.render("tag-list", &tags_data)?;

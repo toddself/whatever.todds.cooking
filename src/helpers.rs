@@ -34,25 +34,32 @@ pub fn truncate_text(text: &str, truncate_len: usize) -> &str {
         return text;
     }
 
-     match text.chars().nth(truncate_len) {
-        Some(c) => match c {
-            ' ' => text.split_at(truncate_len).0,
-            _ => {
-                let truncated = text.split_at(truncate_len);
-                let prev_ws = match truncated.0.rfind(char::is_whitespace) {
-                    Some(i) => i,
-                    None => 0,
-                };
-                let next_ws = match truncated.1.find(char::is_whitespace) {
-                    Some(i) => i,
-                    None => text.len(),
-                };
-                match next_ws > prev_ws {
-                    true => text.split_at(prev_ws).0,
-                    false => text.split_at(next_ws).0,
-                }
-            },
+    match text.get(truncate_len..truncate_len + 1) {
+        Some(s) => {
+            let c:char = s.parse().unwrap();
+            match char::is_whitespace(c) {
+                true => {
+                    text.split_at(truncate_len).0
+                },
+                false => {
+                    let truncated = text.split_at(truncate_len);
+                    let prev_ws = match truncated.0.rfind(char::is_whitespace) {
+                        Some(i) => truncate_len - i,
+                        None => 0,
+                    };
+                    let next_ws = match truncated.1.find(char::is_whitespace) {
+                        Some(i) => i,
+                        None => text.len(),
+                    };
+                    match next_ws > prev_ws {
+                        true => text.split_at(prev_ws).0,
+                        false => text.split_at(next_ws).0,
+                    }
+                },
+            }
         }, 
-        None => text.split_at(truncate_len).0,
+        None => {
+            text.split_at(truncate_len).0
+        },
     }
 }

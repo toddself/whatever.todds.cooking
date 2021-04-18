@@ -19,7 +19,20 @@
       </span>
     </div>
     {{#each contents}}
-      {{{this}}}
+<article class="post">
+  <div>
+    <h2><a href="{{this.url}}">{{{this.title}}}</a></h2>
+    {{{this.contents}}}
+  </div>
+  <time>{{this.modified}}</time>
+  {{#if this.has_tags}}
+  Tags: <ul class="tags">
+  {{#each this.tags}}
+    <li class="tags"><a href="tags.html#{{this}}">{{this}}</a></li>
+  {{/each}}
+  </ul>
+  {{/if}}
+</article>
     {{/each}}
     </main>
     {{#if pagination}}
@@ -31,7 +44,7 @@
       </ol>
     </nav>
     {{/if}}
-    <footer class="content">Find me on: <a href="https://instagram.com/@whatever_todds_cooking">Instagram</a> <a href="httsp://twitter.com/@todds_cooking/">Twitter</a><br>All content copyright © 2021, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a> Source: <a href="https://github.com/toddself/whatever.todds.cooking">github</a></footer>
+    <footer class="content">Find me on: <a href="https://instagram.com/@whatever_todds_cooking">Instagram</a> <a href="httsp://twitter.com/@todds_cooking/">Twitter</a><br>All content copyright © {{year}}, License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International</a><br>Source code: <a href="https://github.com/toddself/whatever.todds.cooking">github</a><br>Last updated: {{pub_date}}</footer>
     <script>
     const f = document.querySelector('.sf');
     const h = 'hidden';
