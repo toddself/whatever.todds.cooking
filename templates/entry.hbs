@@ -1,13 +1,13 @@
 <article class="post">
   <div>
-    <h2>{{{title}}}</h2>
+    <h2><a href="{{url}}">{{{title}}}</a></h2>
     {{{contents}}}
   </div>
   <time>{{modified}}</time>
   {{#if has_tags}}
   Tags: <ul class="tags">
   {{#each tags}}
-    <li class="tags"><a href="tags.html#{{this}}">{{this}}</li>
+    <li class="tags"><a href="tags.html#{{this}}">{{this}}</a></li>
   {{/each}}
   </ul>
   {{/if}}

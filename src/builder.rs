@@ -1,15 +1,16 @@
 use std::{error::Error, fmt, result::Result};
-use std::path::{Path, PathBuf};
+use std::path;
 use std::fs;
 use std::str;
+use std::collections::BTreeMap;
 
 use comrak::{markdown_to_html, ComrakOptions};
 use chrono::{DateTime, FixedOffset, Local};
 use voca_rs::strip::strip_tags;
 use handlebars::Handlebars;
-use serde_json::json;
+use serde_json::{json, Value};
 
-use crate::helpers::{parse_date, parse_tags, get_entries};
+use crate::helpers::{parse_date, parse_tags, get_entries, truncate_text};
 
 #[derive(Debug)]
 pub struct BuilderDirError {
@@ -47,12 +48,12 @@ pub struct FileEntry {
 
 #[derive(Debug)]
 pub struct Builder <'a> {
-    src_dir: &'a Path,
-    dest_dir: &'a  Path,
-    files: Vec<PathBuf>,
+    src_dir: &'a path::Path,
+    dest_dir: &'a  path::Path,
+    files: Vec<path::PathBuf>,
     entries: Vec<FileEntry>,
     num_per_page: i32,
-    template_dir: &'a Path,
+    template_dir: &'a path::Path,
     hbs: Handlebars<'a>,
 }
 
@@ -61,9 +62,9 @@ const DATE_FORMAT:&str = "%A, %b %e, %Y";
 
 impl<'a> Builder<'a> {
     pub fn new(s: &'a str, d: &'a str, t: &'a str, c: i32) -> Result<Builder<'a>, Box<dyn Error>> {
-        let src_dir = Path::new(s);
-        let dest_dir = Path::new(d);
-        let template_dir = Path::new(t);
+        let src_dir = path::Path::new(s);
+        let dest_dir = path::Path::new(d);
+        let template_dir = path::Path::new(t);
 
         if src_dir.is_dir() == false {
             let msg = format!("src dir ({}) is not a dir", s);
@@ -90,7 +91,7 @@ impl<'a> Builder<'a> {
         };
 
         let mut hbs = Handlebars::new();
-        let templates:Vec<PathBuf> = match get_entries(t) {
+        let templates:Vec<path::PathBuf> = match get_entries(t) {
             Ok(t) => t,
             Err(_e) => vec![],
         };
@@ -108,7 +109,6 @@ impl<'a> Builder<'a> {
             };
             hbs.register_template_file(name, tpl_path)?;
         }
-
 
         Ok(Builder{
             src_dir,
@@ -129,7 +129,7 @@ impl<'a> Builder<'a> {
         self.entries.sort_by(|a, b| {
             let bd = b.modified.signed_duration_since(a.modified);
             let ad = a.modified.signed_duration_since(b.modified);
-            ad.cmp(&bd)
+            bd.cmp(&ad)
         });
         Ok(self.build_blog()?)
     }
@@ -152,6 +152,10 @@ impl<'a> Builder<'a> {
             }
         }
 
+        let now = Local::now();
+        let mut rss_data:Vec<_> = vec![];
+        let mut tag_map:BTreeMap<String, Vec<Value>> = BTreeMap::new();
+
         for entry_set in self.entries.chunks(num_per_page) {
             let mut entries:Vec<String> = vec![];
             for entry in entry_set {
@@ -161,6 +165,7 @@ impl<'a> Builder<'a> {
                     "contents": entry.contents,
                     "tags": entry.tags,
                     "has_tags": has_tags,
+                    "url": entry.url,
                     "modified": entry.modified.format(DATE_FORMAT).to_string(),
                 });
                 let rendered = self.hbs.render("entry", &post_data)?;
@@ -174,25 +179,73 @@ impl<'a> Builder<'a> {
                 println!("Writing {} to {:?}", entry.title, output_fn);
                 fs::write(output_fn, full_post)?;
                 entries.push(rendered);
+
+                if count == 0 {
+                    rss_data.push(json!({
+                        "title": entry.title,
+                        "description": truncate_text(entry.raw_text.as_str(), 200),
+                        "modified": entry.modified.format(DATE_FORMAT).to_string(),
+                        "url": entry.url,
+                    }));
+                }
+
+                for tag in entry.tags.iter() {
+                    let tag_entry = json!({
+                        "url": entry.url,
+                        "title": entry.title,
+                        "tag": tag,
+                    });
+                    match tag_map.get_mut(tag) {
+                        Some(tl) => tl.push(tag_entry),
+                        None => {
+                            tag_map.insert(String::from(tag), vec![tag_entry]);
+                        },
+                    };
+                }
             }
-            let index_fn = match count {
-                0 => String::from("index.html"),
-                _ => format!("index{}.html", count),
-            };
+
             let page_data = json!({
                 "title": "whatever todd's cooking",
                 "contents": entries,
                 "pagination": pagination,
+                "year": now.format("%Y").to_string(),
+                "pub_date": now.format("%a, %e %b, %Y %T %Z").to_string(),
             });
+
+            let index_fn = match count {
+                0 => {
+                    let rss_data = json!({
+                        "title": "whatever todd's cooking",
+                        "entries": rss_data,
+                        "year": now.format("%Y").to_string(),
+                        "pub_date": now.format("%a, %e %b, %Y %T %Z").to_string(),
+                    });
+                    let rss_fn = self.dest_dir.join("index.rss");
+                    let rss_feed = self.hbs.render("rss", &rss_data)?;
+                    println!("Writing RSS feed to {:?}", rss_fn);
+                    fs::write(rss_fn, rss_feed)?;
+                    String::from("index.html")
+                },
+                _ => format!("index{}.html", count),
+            };
+
             let output_fn = self.dest_dir.join(index_fn.as_str());
             let index_page = self.hbs.render("index", &page_data)?;
+            println!("Writing page {} to {:?}", count, output_fn);
             fs::write(output_fn, index_page)?;
             count += 1;
         }
+
+        let tags_data = json!({"tags": tag_map});
+        let tags_fn = self.dest_dir.join("tags.html");
+        let tags_page = self.hbs.render("tag-list", &tags_data)?;
+        println!("Writing tags to {:?}", tags_fn);
+        fs::write(tags_fn, tags_page)?;
+
         Ok(())
     }
 
-    fn parse_entry(&self, file: &PathBuf) -> Result<FileEntry, std::io::Error> {
+    fn parse_entry(&self, file: &path::PathBuf) -> Result<FileEntry, std::io::Error> {
         let filename = file.to_str().unwrap();
         let buf = fs::read_to_string(filename).unwrap();
 
@@ -202,7 +255,7 @@ impl<'a> Builder<'a> {
 
         let mut sep_count = 0;
         for line in buf.lines() {
-            if line == HEADER_DELIMITER {
+                if line == HEADER_DELIMITER {
                 sep_count += 1;
                 if sep_count == 2 {
                     break;
@@ -239,6 +292,8 @@ impl<'a> Builder<'a> {
         comrak_options.render.unsafe_ = true;
         comrak_options.parse.smart = true;
         comrak_options.extension.front_matter_delimiter = Some(HEADER_DELIMITER.to_owned());
+        comrak_options.extension.strikethrough = true;
+        comrak_options.extension.tagfilter = false;
         let contents = markdown_to_html(buf.as_str(), &comrak_options);
         let raw_text = strip_tags(contents.as_str());
 

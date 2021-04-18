@@ -1,5 +1,5 @@
 ---
-date: 2021-03-25T18:22:00.00
+date: 2021-03-25T18:22:00.00-07:00
 tags: nachos,beer
 title: Nachos and Beer
 ---

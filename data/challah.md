@@ -1,6 +1,8 @@
-$2021-04-07T06:40:00-0700
-%bread,potatoes,weekly-menu
-## Challah & Scalloped Potatoes
+---
+date: 2021-04-07T06:40:00-07:00
+tags: bread,potatoes,weekly-menu
+title: Challah & Scalloped Potatoes
+---
 
 It's already goddamn Wednesday morning and I just got did the shopping for the week which means a) we've had take out or leftovers since Sunday (I might be part ham at this point) and b) work has been kicking my ass and I'm off my fucking game. This week's menu will probably include:
 
@@ -17,13 +19,17 @@ There are a few things I desperately miss about New York &#151; adequate public 
 Oh sure. You can get bread here.  Which kind of hard, steam-injected, crusty loaf do you want? That's all well and good, but like where are the other kinds of bread? I guess sometimes you can spot a lavish buttery Brioche, what of the ryes and challahs and easy availability of real bagels? (And yes, bagels are the new hot shit here, but certainly not in my neighborhood and who the fuck orders bagels in advance? They're for picking up on your way to the subway to eat at your desk and fling the fallen sesame seeds into the keyboards of your enemies.)
 
 <figure>
+
 ![A braided, circular loaf of challah](challah_challah.jpg)
+
 </figure>
 
 Anyway, for some reason Easter to me screams for challah bread (even though Easter and Passover are the same this year, this bread is chametz, and come the fuck on, I made a goddamn ham) which is sort of like a brioche, but you can't use butter in it or it wouldn't be parve and you'd have to relegate it to the milk plates, so it ends up being a little less rich. I used King Arthur's [classic challah](https://www.kingarthurbaking.com/recipes/classic-challah-recipe) recipe to make this. It's pretty straight-forward, only the flour was not very thirsty so I had to add about 10-15g more flour to the mixer to get it into a (very wet) dough shape rather than a batter. I actually used the "proof" mode on my new oven to do all the rising for this loaf and I have to say I was pretty impressed. It took only an hour for each rise to get the dough real nice and puffy.
 
 <figure>
+
 ![Scalloped potatoes](challah_potatoes.jpg)
+
 </figure>
 
 Even though every time I try to get my oldest to eat anything potato related that isn't a French fry (and French fries are only acceptable since THIS FUCKING MARCH) he will literally vomit it at the table like he's trying to feed a family of baby birds. The first few times this happened you're all "oh it must be a texture thing" and you get worried and nervous I mean your son is gagging and vomiting at the table. (Although you only try to catch it with your hand once.  Once.) Then you remember children are fucking agents of chaos.

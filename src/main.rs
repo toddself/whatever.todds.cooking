@@ -43,7 +43,7 @@ fn main() {
     let count = matches.value_of("entries").unwrap().parse().unwrap();
     let mut b = Builder::new(src_dir, dest_dir, template_dir, count).unwrap();
     match b.build() {
-        Ok(_a) => println!("Blog build!"),
+        Ok(_a) => println!("Blog built!"),
         Err(e) => println!("{:?}", e),
     };
 }

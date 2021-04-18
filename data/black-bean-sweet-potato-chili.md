@@ -1,5 +1,5 @@
 ---
-date: 2021-03-19T21:00:00-0700
+date: 2021-03-19T21:00:00-07:00
 tags: black-beans,sweet-potato,chili
 title: Black Bean & Sweet Potato Chili
 ---
