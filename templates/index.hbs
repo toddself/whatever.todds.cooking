@@ -25,13 +25,11 @@
     {{{this.contents}}}
   </div>
   <time>{{this.modified}}</time>
-  {{#if this.has_tags}}
   Tags: <ul class="tags">
   {{#each this.tags}}
     <li class="tags"><a href="tags.html#{{this}}">{{this}}</a></li>
   {{/each}}
   </ul>
-  {{/if}}
 </article>
     {{/each}}
     </main>

@@ -70,14 +70,8 @@ pub fn truncate_text(text: &str, truncate_len: usize) -> &str {
                         None => text.len(),
                     };
                     match next_ws > prev_ws {
-                        true => {
-                            println!("Splitting at {}", prev_ws);
-                            text.split_at(prev_ws).0
-                        },
-                        false => {
-                            println!("Splitting at {}", next_ws);
-                            text.split_at(next_ws).0
-                        }
+                        true =>  text.split_at(prev_ws).0,
+                        false => text.split_at(next_ws).0, 
                     }
                 },
             }
