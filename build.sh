@@ -1,8 +1,20 @@
 #!/bin/bash
 
-# make blog
-rustup toolchain install stable
-cargo run data dist
+# download latest blog-builder
+PLATFORM=$(uname | tr A-Z a-z)
+ARCH=$(uname -m)
+BIN_NAME="blog-builder-${PLATFORM}-${ARCH}"
+
+if [ -f ${BIN_NAME} ]; then
+  echo "Binary exists"
+else
+  echo "Binary doesn't exist, downloading latest version"
+  DOWNLOAD_URL=$(curl -s https://api.github.com/repos/toddself/blog-builder/releases/latest | jq -r ".assets[] | select(.name == \"${BIN_NAME}\").browser_download_url")
+  curl -sLO $DOWNLOAD_URL
+  chmod +x ${BIN_NAME}
+fi
+
+./${BIN_NAME} data dist
 
 # handle images
 shopt -s nullglob dotglob
