@@ -7,9 +7,18 @@
     <description>A blog about whatever, todd's cooking</description>
     <language>en-US</language>
     <copyright>Copyright 2023 whatever.todds.cooking</copyright>
-    <lastBuildDate>Sat, 14 Jan, 2023 08:08:24 -08:00</lastBuildDate>
+    <lastBuildDate>Sat, 14 Jan, 2023 14:44:02 -08:00</lastBuildDate>
     <generator>whatever.todds.cooking</generator>
     <ttl>40</ttl>
+    
+    <item>
+      <title>That was a hell of a vacation, but I made some Pizza</title>
+      <description>I guess in my last post I ended it with a very prescient “I need a fucking vacation.”  And here we are in the year of our lard twenty-goddamn-twenty-three, a full six hundred and five days later (and yes, I know that the Associated Press and various other style guides are all “numbers under 10 or</description>
+      <pubDate>Saturday, Jan 14, 2023</pubDate>
+      <guid>https://whatever.todds.cooking/welcome-back.html</guid>
+      <link>https://whatever.todds.cooking/welcome-back.html</link>
+      <source url="https://whatever.todds.cooking">whatever, todd's cooking</source>
+    </item>
     
     <item>
       <title>Sweet Potato Tacos & Salsa</title>
@@ -227,15 +236,6 @@ I accomplished at least one of those goals so in your face “Saint” Nick.</de
       <pubDate>Sunday, Mar 28, 2021</pubDate>
       <guid>https://whatever.todds.cooking/roast-beef.html</guid>
       <link>https://whatever.todds.cooking/roast-beef.html</link>
-      <source url="https://whatever.todds.cooking">whatever, todd's cooking</source>
-    </item>
-    
-    <item>
-      <title>Lamb Kabobs, Cauliflower & Hazelnut Salad, Labneh</title>
-      <description>Well, the downside of the new kitchen is that the hood fan works well enough that I can no longer use the smoke detectors as an alert when the cooking is done. The upside is that the neighbors no longer think I’m a pyromaniac. Which is exactly what a pyromaniac would want them to think. I think we</description>
-      <pubDate>Friday, Mar 26, 2021</pubDate>
-      <guid>https://whatever.todds.cooking/lamb-cauliflower.html</guid>
-      <link>https://whatever.todds.cooking/lamb-cauliflower.html</link>
       <source url="https://whatever.todds.cooking">whatever, todd's cooking</source>
     </item>
     
