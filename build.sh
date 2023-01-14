@@ -14,7 +14,7 @@ else
   chmod +x ${BIN_NAME}
 fi
 
-./${BIN_NAME} data dist
+./${BIN_NAME} data docs
 
 # handle images
 shopt -s nullglob dotglob
@@ -33,4 +33,4 @@ if [ -e $PWD/raw_images ]; then
 fi
 
 # copy assets
-cp -R assets/* dist/.
+cp -R assets/* docs/.
