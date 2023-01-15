@@ -14,5 +14,5 @@ jobs:
         with:
           name: github-pages
           path: ${{ runner.temp }}/artifact.tar
-
-
+      - name: deploy
+        uses: actions/deploy-pages@v1
