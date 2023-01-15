@@ -4,6 +4,7 @@
 PLATFORM=$(uname | tr A-Z a-z)
 ARCH=$(uname -m)
 BIN_NAME="blog-builder-${PLATFORM}-${ARCH}"
+INPUT_PATH="dist/"
 
 if [ -f ${BIN_NAME} ]; then
   echo "Binary exists"
@@ -14,7 +15,7 @@ else
   chmod +x ${BIN_NAME}
 fi
 
-./${BIN_NAME} data docs
+./${BIN_NAME} data "${INPUT_PATH}" 
 
 # handle images
 shopt -s nullglob dotglob
@@ -33,4 +34,15 @@ if [ -e $PWD/raw_images ]; then
 fi
 
 # copy assets
-cp -R assets/* docs/.
+cp -R assets/* "${INPUT_PATH}"/.
+
+chmod -c -R +rX "${INPUT_PATH}" | while read line; do
+  echo "::warning title=Invalid file permissions automatically fixed::$line"
+done
+tar \
+  --dereference --hard-dereference \
+  --directory "${INPUT_PATH}" \
+  -cvf "${RUNNER_TEMP}/artifact.tar" \
+  --exclude=.git \
+  --exclude=.github \
+  .
