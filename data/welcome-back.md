@@ -42,6 +42,8 @@ ANYWAY you want to let it rise in bulk until it's twice the size and then you wa
 
 ![A meatball and broccoli rabe pizza](meatball-grandma.jpg)
 
+</figure>
+
 An hour before you want to cook, get your oven to a reasonable 475º and let it heat for an hour. Top those fuckers and put them in for like 20 minutes, rotating and moving them as necessary to make sure they cook evenly.  Let them cook for a few minutes and then slide the pizza off the pan. This will work if you used enough oil. If you didn't they'll stick like that fucking swear of jam your daughter left on the table and didn't tell anyone and like four days later you're resting your elbow on the table and then you go to move and it rips your flesh off as its permanently bonded to the goddamn jam and the table. Next time use more oil. Or like some parchment paper. I'm not your fucking boss.
 
 
