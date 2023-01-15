@@ -2,8 +2,11 @@ name: Publish site
 on:
   push:
 jobs:
-  Publish:
+  publish:
     runs-on: ubuntu-latest
+    permissions:
+      pages: write 
+      id-token: write
     steps:
       - name: checkout
         uses: actions/checkout@v3
