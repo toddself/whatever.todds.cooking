@@ -16,7 +16,7 @@ But wait. Time for two truths and a lie:
 
 1. I have had 25 different jobs in the last 28 years.
 1. I've hugged Snoop Dog
-1. My cat can eat a whole watermelon
+1. I'm hotter than a Mercedes-Benz with the windows up when the temp goes up to the mid-80s.
 
 The first person to figure it out gets the privilege of letting me write a profanity on their forehead in a sharpie. Dial 1-800-LASERFACE to enter.
 
@@ -45,5 +45,7 @@ THAT WONDERFUL FUCKING KID ASKED FOR GODDAMN SECONDS.
 ![Sloppy joes](sloppy-joes.jpg)
 
 <figcaption>I was so shook by his requests for seconds it affected my photography skills obviously</figcaption>
+
+I'll also have you note I made it through this ENTIRE POST without making a single goddamn Billy Madison reference.
 
 </figure>
