@@ -1,5 +1,5 @@
 ---
-date: 2023-01-26T16:27:00-07:00
+date: 2023-01-28T16:27:00-07:00
 tags: polenta,beef,short ribs
 title: Short Ribs with Polenta & Sauteed Greens
 ---
