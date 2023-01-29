@@ -33,7 +33,7 @@ Oh yeah that sounds really nice! I was just gonna hunker down in my apartment an
 
 EXT. NIGHTTIME, OUTSIDE A SMALL APARTMENT BUILDING IN WILLIAMSBURG
 
-Juile is knocking on the door and being let in
+JULIE is knocking on the door and being let in
 
 DISSOLVE TO:
 
@@ -209,7 +209,7 @@ The next day I took out the braising liquid and took the solid cap of fat off, a
 
 While that I was cooking I softened a thinly sliced shallot and more garlic that would be prudent in some of the beef fat from the braise and then added two and a half quarts of liquid: a combination of chicken stock, whole milk and water. When this came to a boil I added 2 cups of coarse cornmeal along with 1/8 of a tsp of baking soda while vigorously whisking to prevent lumps. Also do you know what happens when you add milk AND baking soda to boiling liquid? Its like the end of Ghostbusters when they blow up the Stay Puft Marshalmallow man. Only it's way harder to clean it off the stove. So use a big pot and turn down the goddamn heat. I added the rind from a block of Parmesan that I found in the freezer and have no fucking clue how old it was. This cooked for a good hour, stirring more than occasionally, less than frequently. (What quantifier is that?) When it was nearly done I added a half stick of butter (yes, readers, that is an ENTIRE stick of butter in the meal so far), and a metric shit load of grated parm and stirred it in. 
 
-Also, the other day I was wondering around Costco and saw they had truffles packed in olive oil and it wasn't like stupidly expensive (mostly because you can farm some types of truffles, but they have not a lot of flavor, but you can add synthetic truffle flavoring to oil REAL easy, so like, ooooooooooooooooooooh FUCKING TRUFFLES.) Obviously I bought these and added a bunch of the truggles to the polenta.
+Also, the other day I was wondering around Costco and saw they had truffles packed in olive oil and it wasn't like stupidly expensive (mostly because you can farm some types of truffles, but they have not a lot of flavor, but you can add synthetic truffle flavoring to oil REAL easy, so like, ooooooooooooooooooooh FUCKING TRUFFLES.) Obviously I bought these and added a bunch of the truffles to the polenta.
 
 And because this all seemed like it was really unhealthy I sauteed some chard in some garlic oil I made. (I confited? confeed? confiteed? what the fuck French a bunch of garlic for a good hour at like 200º until it was crispy and golden.)  I also took the chard stems and pickled them becuase we needed something vinegary to cut through all the fat.
 
